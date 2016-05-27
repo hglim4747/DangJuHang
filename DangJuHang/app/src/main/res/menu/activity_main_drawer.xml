@@ -6,15 +6,40 @@
             android:id="@+id/user"
             android:icon="@drawable/user"
             android:title="나" />
+        <item
+            android:id="@+id/search"
+            android:icon="@drawable/search"
+            android:title="검색"
+            />
+        <item
+            android:id="@+id/like"
+            android:icon="@drawable/like"
+            android:title="가고팡"
+            />
+        <item
+            android:id="@+id/rcm"
+            android:icon="@drawable/rcm"
+            android:title="가라궁"
+            />
+        <item
+            android:id="@+id/reg"
+            android:icon="@drawable/reg"
+            android:title="등록"
+            />
+        <item
+            android:id="@+id/news"
+            android:icon="@drawable/news"
+            android:title="뉴스피드"
+            />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-        </menu>
-    </item>
+    <!--<item android:title="Communicate">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_share"-->
+                <!--android:icon="@drawable/ic_menu_share"-->
+                <!--android:title="Share" />-->
+        <!--</menu>-->
+    <!--</item>-->
 
 </menu>

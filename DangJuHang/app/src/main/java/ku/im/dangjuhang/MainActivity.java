@@ -1,5 +1,8 @@
 package ku.im.dangjuhang;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -15,7 +18,9 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    Fragment fragment;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +48,17 @@ public class MainActivity extends AppCompatActivity
 
         new Client().NaverLogin(this);
 
+        init();
+    }
+    void init(){
+        if(fragment == null){
+            fragmentManager = getFragmentManager();
+            fragment = fragmentManager.findFragmentById(R.id.frame);
+            fragmentTransaction = fragmentManager.beginTransaction();
+            NewsFrag newsFrag = new NewsFrag();
+            fragmentTransaction.add(R.id.frame,newsFrag);
+            fragmentTransaction.commit(); // 처음엔 뉴스피드
+        }
     }
 
     @Override
@@ -81,13 +97,36 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
         int id = item.getItemId();
-
         if (id == R.id.user) {
-            // Handle the camera action
-        } else if (id == R.id.nav_share) {
-
+                MyFrag myFrag = new MyFrag();
+                fragmentTransaction.replace(R.id.frame, myFrag);
+            // 내 상태 정보
         }
+        else if (id == R.id.search) {
+
+        } // 검색
+        else if (id == R.id.like) {
+            LikeFrag likeFrag = new LikeFrag();
+            fragmentTransaction.replace(R.id.frame, likeFrag);
+        }// 좋아요 했어
+        else if (id == R.id.rcm) {
+            RcmFrag rcmFrag = new RcmFrag();
+            fragmentTransaction.replace(R.id.frame, rcmFrag);
+        }// 추천해줘
+        else if (id == R.id.reg) {
+            RegFrag regFrag = new RegFrag();
+            fragmentTransaction.replace(R.id.frame, regFrag);
+        }// 등록했어
+        else if (id == R.id.news) {
+            NewsFrag newsFrag = new NewsFrag();
+            fragmentTransaction.replace(R.id.frame,newsFrag);
+        }//최신
+
+        fragmentTransaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
