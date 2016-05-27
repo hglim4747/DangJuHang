@@ -13,7 +13,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringReader;
 
 /**
@@ -38,7 +37,6 @@ public class Client {
                 //   mOauthExpires.setText(String.valueOf(expiresAt));
                 //   mOauthTokenType.setText(tokenType);
                 //   mOAuthState.setText(mOAuthLoginModule.getState(getApplicationContext()).toString());
-
                 String info = mOAuthLoginModule.requestApi(context, accessToken, "https://apis.naver.com/nidlogin/nid/getUserProfile.xml");
                 String in = info;
                 info = info + "";
