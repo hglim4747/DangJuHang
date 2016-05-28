@@ -22,31 +22,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Fragment fragment;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-            if(findViewById(R.id.container_fragment)!=null){
-                if(savedInstanceState !=null){
-                    return;
-                }
-                HeadlinesFragment firstFragment = new HeadlinesFragment();
-                firstFragment.setArguments(getIntent().getExtras());
-                getFragmentManager().beginTransaction()
-                        .add(R.id.container_fragment, firstFragment)
-                        .commit();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        if(findViewById(R.id.container_fragment)!=null){
+            if(savedInstanceState !=null){
+                return;
             }
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
+            HeadlinesFragment firstFragment = new HeadlinesFragment();
+            firstFragment.setArguments(getIntent().getExtras());
+            getFragmentManager().beginTransaction()
+                    .add(R.id.container_fragment, firstFragment)
+                    .commit();
+        }
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-            });
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -120,8 +120,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         int id = item.getItemId();
         if (id == R.id.user) {
-                MyFrag myFrag = new MyFrag();
-                fragmentTransaction.replace(R.id.container_fragment, myFrag);
+            MyFrag myFrag = new MyFrag();
+            fragmentTransaction.replace(R.id.container_fragment, myFrag);
             // 내 상태 정보
         }
         else if (id == R.id.search) {
@@ -156,8 +156,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onArticleSelected(int position) { // Headline을 선택했을 떄 Article로 넘어가는 상황 만들때!?!
         Fragment articleFrag;
-            articleFrag = getFragmentManager().findFragmentByTag("article");
-            //article이란 태그를 가지고 있는 fragment를 찾음!
+        articleFrag = getFragmentManager().findFragmentByTag("article");
+        //article이란 태그를 가지고 있는 fragment를 찾음!
         if (articleFrag != null) {// 이미 있으면
             ((ArticleFragment)articleFrag).updateArticleView(position);
         }
