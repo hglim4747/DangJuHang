@@ -18,10 +18,17 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HeadlinesFragment.OnArticleSelectedListener {
 
+<<<<<<< HEAD
 //
 //    Fragment fragment;
 //    FragmentManager fragmentManager;
 //    FragmentTransaction fragmentTransaction;
+=======
+
+    Fragment fragment;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+>>>>>>> f8294c5221415f0c49740c8a08ac2268bea7618b
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
