@@ -3,7 +3,6 @@ package ku.im.dangjuhang;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
@@ -44,8 +43,8 @@ public class Client {
             } else {
                 String errorCode = mOAuthLoginModule.getLastErrorCode(context).getCode();
                 String errorDesc = mOAuthLoginModule.getLastErrorDesc(context);
-                Toast.makeText(context, "errorCode:" + errorCode
-                        + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "errorCode:" + errorCode
+//                        + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -122,7 +121,7 @@ public class Client {
             return result;
         }
         protected void onPostExecute(String content) {
-            Toast.makeText(context, content, Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, content, Toast.LENGTH_LONG).show();
         }
     }
 }

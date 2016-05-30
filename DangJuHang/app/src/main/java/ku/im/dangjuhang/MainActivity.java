@@ -23,21 +23,12 @@ import ku.im.dangjuhang.Fragments.MyFrag;
 import ku.im.dangjuhang.Fragments.RcmFrag;
 import ku.im.dangjuhang.Fragments.RegFrag;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-//
-//    Fragment fragment;
-//    FragmentManager fragmentManager;
-//    FragmentTransaction fragmentTransaction;
-=======
-=======
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HeadlinesFragment.OnArticleSelectedListener {
->>>>>>> 7bed4f5540efa0ef1bdd4e9e24dde0f78b64d086
 
     Fragment fragment;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
->>>>>>> f8294c5221415f0c49740c8a08ac2268bea7618b
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
