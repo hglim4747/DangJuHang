@@ -1,4 +1,4 @@
-package ku.im.dangjuhang;
+package ku.im.dangjuhang.Fragments;
 
 import android.app.Activity;
 import android.app.ListFragment;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import ku.im.dangjuhang.Hangsa;
+import ku.im.dangjuhang.HangsaAdapter;
+import ku.im.dangjuhang.R;
 
 public class HeadlinesFragment extends ListFragment {
 

@@ -6,7 +6,6 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,14 +15,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HeadlinesFragment.OnArticleSelectedListener {
+import ku.im.dangjuhang.Fragments.ArticleFragment;
+import ku.im.dangjuhang.Fragments.HeadlinesFragment;
+import ku.im.dangjuhang.Fragments.LikeFrag;
+import ku.im.dangjuhang.Fragments.MapFrag;
+import ku.im.dangjuhang.Fragments.MyFrag;
+import ku.im.dangjuhang.Fragments.RcmFrag;
+import ku.im.dangjuhang.Fragments.RegFrag;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 //
 //    Fragment fragment;
 //    FragmentManager fragmentManager;
 //    FragmentTransaction fragmentTransaction;
 =======
+=======
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HeadlinesFragment.OnArticleSelectedListener {
+>>>>>>> 7bed4f5540efa0ef1bdd4e9e24dde0f78b64d086
 
     Fragment fragment;
     FragmentManager fragmentManager;
@@ -33,16 +42,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init(savedInstanceState);
+        new Client().NaverLogin(this);
+    }
+
+    void init(Bundle savedInstanceState){
         if(findViewById(R.id.container_fragment)!=null){
             if(savedInstanceState !=null){
                 return;
             }
+            fragmentManager = getFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+
             HeadlinesFragment firstFragment = new HeadlinesFragment();
             firstFragment.setArguments(getIntent().getExtras());
-            getFragmentManager().beginTransaction()
+            fragmentManager.beginTransaction()
                     .add(R.id.container_fragment, firstFragment)
                     .commit();
         }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -50,8 +68,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //       .setAction("Action", null).show();
+                MapFrag mapFrag = new MapFrag();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_fragment, mapFrag);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                //mapFrag.Set(getApplicationContext());
             }
         });
 
@@ -64,27 +88,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        new Client().NaverLogin(this);
-
-        init();
-    }
-    void init(){
-//        if(fragment == null){
-//            fragmentManager = getFragmentManager();
-//            fragment = fragmentManager.findFragmentById(R.id.container_fragment);
-//            fragmentTransaction = fragmentManager.beginTransaction();
-//            ArticleFragment articleFragment = new ArticleFragment();
-//            fragmentTransaction.add(R.id.container_fragment,articleFragment);
-//            fragmentTransaction.commit(); // 처음엔 뉴스피드
-//        }
     }
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+            fragmentManager.popBackStack();
 
         } else {
             if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -93,8 +104,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 super.onBackPressed();
             }
         }
-
-
     }
 
     @Override
@@ -122,13 +131,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         int id = item.getItemId();
         if (id == R.id.user) {
             MyFrag myFrag = new MyFrag();
+            fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_fragment, myFrag);
+            fragmentTransaction.commit();
             // 내 상태 정보
         }
         else if (id == R.id.search) {
@@ -136,25 +145,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } // 검색
         else if (id == R.id.like) {
             LikeFrag likeFrag = new LikeFrag();
+            fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_fragment, likeFrag);
+            fragmentTransaction.commit();
+
         }// 좋아요 했어
         else if (id == R.id.rcm) {
             RcmFrag rcmFrag = new RcmFrag();
+            fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_fragment, rcmFrag);
+            fragmentTransaction.commit();
+
         }// 추천해줘
         else if (id == R.id.reg) {
             RegFrag regFrag = new RegFrag();
+            fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_fragment, regFrag);
+            fragmentTransaction.commit();
+
         }// 등록했어
         else if (id == R.id.news) {
             HeadlinesFragment firstFragment = new HeadlinesFragment();
             firstFragment.setArguments(getIntent().getExtras());
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.container_fragment, firstFragment)
-                    .commit();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_fragment, firstFragment);
+            fragmentTransaction.commit();
         }//최신
-
-        fragmentTransaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -163,17 +179,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onArticleSelected(int position) { // Headline을 선택했을 떄 Article로 넘어가는 상황 만들때!?!
         Fragment articleFrag;
-        articleFrag = getFragmentManager().findFragmentByTag("article");
+        articleFrag = fragmentManager.findFragmentByTag("article");
         //article이란 태그를 가지고 있는 fragment를 찾음!
         if (articleFrag != null) {// 이미 있으면
             ((ArticleFragment)articleFrag).updateArticleView(position);
         }
         else {
             ArticleFragment newFragment = ArticleFragment.newInstance(position);
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.container_fragment, newFragment, "article");
-            transaction.addToBackStack(null);
-            transaction.commit();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_fragment, newFragment, "article");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         }
     }
 }

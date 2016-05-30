@@ -1,4 +1,6 @@
-package ku.im.dangjuhang;
+package ku.im.dangjuhang.Fragments;
+
+import ku.im.dangjuhang.R;
 
 /**
  * Created by kim on 2016-04-30.
