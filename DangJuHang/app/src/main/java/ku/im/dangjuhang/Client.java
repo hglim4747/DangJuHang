@@ -32,8 +32,8 @@ public class Client {
                 String refreshToken = mOAuthLoginModule.getRefreshToken(context);
                 long expiresAt = mOAuthLoginModule.getExpiresAt(context);
                 String tokenType = mOAuthLoginModule.getTokenType(context);
-                // mOauthAT.setText(accessToken);
-                //  mOauthRT.setText(refreshToken);
+                //   mOauthAT.setText(accessToken);
+                //   mOauthRT.setText(refreshToken);
                 //   mOauthExpires.setText(String.valueOf(expiresAt));
                 //   mOauthTokenType.setText(tokenType);
                 //   mOAuthState.setText(mOAuthLoginModule.getState(getApplicationContext()).toString());
@@ -104,7 +104,6 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return result;
     }
 

@@ -1,4 +1,4 @@
-package ku.im.dangjuhang;
+package ku.im.dangjuhang.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import ku.im.dangjuhang.R;
 
 public class ArticleFragment extends Fragment {
     final static String ARG_POSITION = "position";
