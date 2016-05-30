@@ -3,6 +3,7 @@ package ku.im.dangjuhang;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -61,12 +62,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //       .setAction("Action", null).show();
-                MapFrag mapFrag = new MapFrag();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container_fragment, mapFrag);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+//                MapFrag mapFrag = new MapFrag();
+//                fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.container_fragment, mapFrag);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
                 //mapFrag.Set(getApplicationContext());
+
+                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                startActivity(intent);
             }
         });
 
