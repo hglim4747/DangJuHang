@@ -1,1 +1,1 @@
-include ':app', ':3rdparty_login_library_android_4.1.4', ':3rdparty_login_library_android_4.1.4_source', ':nmaps'
+include ':app', ':3rdparty_login_library_android_4.1.4', ':3rdparty_login_library_android_4.1.4_source', ':nmaps', ':httpcore-4.1.2', ':apache-httpcomponents-httpclient'
