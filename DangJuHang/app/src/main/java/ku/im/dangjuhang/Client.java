@@ -2,18 +2,31 @@ package ku.im.dangjuhang;
 
 import android.app.Activity;
 import android.content.Context;
+import android.location.Geocoder;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * Created by Gyu on 2016-05-23.
@@ -22,6 +35,7 @@ public class Client {
     OAuthLogin mOAuthLoginModule;
     OAuthLoginHandler handler;
     Context context;
+    DefaultHttpClient httpClient = new DefaultHttpClient();
 
     class MyAuthHandler extends OAuthLoginHandler
     {
@@ -44,8 +58,8 @@ public class Client {
             } else {
                 String errorCode = mOAuthLoginModule.getLastErrorCode(context).getCode();
                 String errorDesc = mOAuthLoginModule.getLastErrorDesc(context);
-                Toast.makeText(context, "errorCode:" + errorCode
-                        + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "errorCode:" + errorCode
+//                        + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -65,6 +79,74 @@ public class Client {
         handler = new MyAuthHandler();
         mOAuthLoginModule.startOauthLoginActivity(act, handler);
         new RequestApiTask().execute();
+    }
+
+    class RequestPlace extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String url = null;
+            try {
+                url = "https://openapi.naver.com/v1/search/local.xml?query="+ URLEncoder.encode(params[0], "UTF-8") +"&display=10&start=1&sort=vote";
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            HttpGet httpget = new HttpGet(url);
+            httpget.setHeader("Content-Type", "application/json");
+            httpget.setHeader("Accept", "*/*");
+            httpget.setHeader("X-Naver-Client-Id", "S6nKrH6CGNXyt2TKEYZY");
+            httpget.setHeader("X-Naver-Client-Secret", "DJtUt0iCNx");
+            String result = "";
+            try {
+                HttpResponse response = httpClient.execute(httpget);
+                String line = null;
+                BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+                while((line = br.readLine()) != null){
+                    result += line;
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+    };
+
+
+    class RequestCoord extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String url = null;
+            try {
+                url = "https://openapi.naver.com/v1/map/geocode?encoding=utf-8&coord=latlng&output=json&query=" + URLEncoder.encode(params[0], "EUC-KR");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            HttpGet httpget = new HttpGet(url);
+            httpget.setHeader("Content-Type", "application/json");
+            httpget.setHeader("Accept", "*/*");
+            httpget.setHeader("X-Naver-Client-Id", "S6nKrH6CGNXyt2TKEYZY");
+            httpget.setHeader("X-Naver-Client-Secret", "DJtUt0iCNx");
+            String result = "";
+            try {
+                HttpResponse response = httpClient.execute(httpget);
+                String line = null;
+                     BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+                     while((line = br.readLine()) != null){
+                             result += line;
+                     }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+    };
+
+    boolean SearchCoord(String search, Float lat, Float longi)
+    {
+        new RequestPlace().execute(search);
+        new RequestCoord().execute(search);
+        return true;
     }
 
     String XMLParsing(String content)
@@ -107,7 +189,6 @@ public class Client {
         return result;
     }
 
-
     private class RequestApiTask extends AsyncTask<Void, Void, String> {
         @Override
         protected void onPreExecute() {
@@ -122,7 +203,7 @@ public class Client {
             return result;
         }
         protected void onPostExecute(String content) {
-            Toast.makeText(context, content, Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, content, Toast.LENGTH_LONG).show();
         }
     }
 }

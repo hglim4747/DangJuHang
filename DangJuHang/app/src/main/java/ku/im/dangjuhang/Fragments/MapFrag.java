@@ -37,6 +37,7 @@ public class MapFrag extends NMapFragment {
     TextView text;
     NMapView mMapView;
     NMapController mMapController;
+    NMapViewerResourceProvider mMapViewerResourceProvider;
     @TargetApi(Build.VERSION_CODES.M)
     @Nullable
     @Override
@@ -52,29 +53,8 @@ public class MapFrag extends NMapFragment {
         return root;
     }
 
-    public void Set(Context context)
+    public void Set(Activity activity)
     {
-        NMapLocationManager mMapLocationManager = new NMapLocationManager(context);
-        mMapLocationManager.setOnLocationChangeListener(new NMapLocationManager.OnLocationChangeListener() {
-            @Override
-            public boolean onLocationChanged(NMapLocationManager nMapLocationManager, NGeoPoint nGeoPoint) {
-                return false;
-            }
 
-            @Override
-            public void onLocationUpdateTimeout(NMapLocationManager nMapLocationManager) {
-
-            }
-
-            @Override
-            public void onLocationUnavailableArea(NMapLocationManager nMapLocationManager, NGeoPoint nGeoPoint) {
-
-            }
-        });
-
-        NMapCompassManager mMapCompassManager = new NMapCompassManager(getActivity());
-        NMapViewerResourceProvider mMapViewerResourceProvider = new NMapViewerResourceProvider(context);
-        NMapOverlayManager mOverlayManager = new NMapOverlayManager(context, mMapView, mMapViewerResourceProvider);
-        NMapMyLocationOverlay mMyLocationOverlay = mOverlayManager.createMyLocationOverlay(mMapLocationManager, mMapCompassManager);
     }
 }
