@@ -3,122 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="20dp"
-    tools:context="ku.im.dangjuhang.MainActivity">
+    tools:context="ku.im.dangjuhang.MainActivity"
+    android:baselineAligned="false"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.astuetz.PagerSlidingTabStrip
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_margin="5dp">
-    <TextView
-        android:text="이름    "
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="13pt"/>
-    <EditText
-        android:id="@+id/regfrag_name"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:background="@drawable/edit_style"
-        android:hint="20자 이내"/>
-    </LinearLayout>
+        android:layout_height="40dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_margin="5dp">
-        <TextView
-            android:text="장소    "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="13pt"/>
-        <EditText
-            android:id="@+id/regfrag_Address"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:background="@drawable/edit_style"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_margin="5dp">
-        <TextView
-            android:text="기간    "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="13pt"/>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="3dp">
-            <EditText
-                android:id="@+id/regfrag_edit_startdate"
-                android:layout_width="120dp"
-                android:layout_height="40dp"
-                android:hint="개장시간" />
-            <EditText
-                android:id="@+id/regfrag_edit_enddate"
-                android:layout_width="120dp"
-                android:layout_height="40dp"
-                android:hint="폐점시간" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="3dp">
-            <Button
-                android:id="@+id/startdatebtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="OPEN" />
-            <Button
-                android:id="@+id/enddatebtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CLOSE" />
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_margin="5dp">
-        <TextView
-            android:text="설명    "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="13pt"/>
-        <EditText
-            android:id="@+id/regfrag_Explane"
-            android:layout_width="200dp"
-            android:layout_height="170dp"
-            android:background="@drawable/edit_style" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="20dp">
-        <Button
-            android:id="@+id/regfrag_insertbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="등록"/>
-        <Button
-            android:id="@+id/regfrag_cancelbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="취소"/>
-    </LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_below="@id/tabs"
+        android:layout_width = "match_parent"
+        android:layout_height= "match_parent">
+
+    </android.support.v4.view.ViewPager>
+
 </LinearLayout>

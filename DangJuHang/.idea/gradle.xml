@@ -11,7 +11,9 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/3rdparty_login_library_android_4.1.4" />
             <option value="$PROJECT_DIR$/3rdparty_login_library_android_4.1.4_source" />
+            <option value="$PROJECT_DIR$/apache-httpcomponents-httpclient" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/httpcore-4.1.2" />
             <option value="$PROJECT_DIR$/nmaps" />
           </set>
         </option>
@@ -20,7 +22,9 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/3rdparty_login_library_android_4.1.4" />
             <option value="$PROJECT_DIR$/3rdparty_login_library_android_4.1.4_source" />
+            <option value="$PROJECT_DIR$/apache-httpcomponents-httpclient" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/httpcore-4.1.2" />
             <option value="$PROJECT_DIR$/nmaps" />
           </set>
         </option>
