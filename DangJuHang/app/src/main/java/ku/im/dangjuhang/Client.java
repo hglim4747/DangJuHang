@@ -146,7 +146,7 @@ public class Client {
         }
     };
 
-    boolean SearchPlace(String search, Double lat[], Double longi[])
+    public boolean SearchPlace(String search, Double lat[], Double longi[])
     {
         String page = "";
         HashMap<String, String> getSearchData = new HashMap<>();

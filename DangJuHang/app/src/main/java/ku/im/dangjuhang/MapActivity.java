@@ -97,12 +97,11 @@ public class MapActivity extends NMapActivity  {
         ArrayList<Hangsa> list = mXMLParser.getArray();
         for(int i=0; i<list.size(); i++)
         {
-            Double[] v = new Double[2];
-            Double[] v1 = new Double[2];
-            boolean success = new Client().SearchPlace(list.get(i).getplace(), v, v1);
-            if(success)
+            double x = list.get(i).x;
+            double y = list.get(i).y;
+            if(x > 0 && y > 0)
             {
-                poiData.addPOIitem(v[0].doubleValue(), v1[0].doubleValue(), list.get(i).getTitle(), markerId, 0);
+                poiData.addPOIitem(x, y, list.get(i).getTitle(), markerId, 0);
             }
         }
 

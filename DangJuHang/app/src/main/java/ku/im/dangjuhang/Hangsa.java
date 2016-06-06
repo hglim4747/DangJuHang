@@ -19,6 +19,8 @@ public class Hangsa implements Parcelable{
     String minquiry;
     String mcontents;
 
+    public double x,y;
+
     public Hangsa(String title, String start_date,
                   String end_date, String time,
                   String place, String org_link,
@@ -34,6 +36,9 @@ public class Hangsa implements Parcelable{
         muse_fee = use_fee.replace("&#39;","");
         minquiry = inquiry.replace("&#39;","");
         mcontents = contents.replace("&#39;","");
+
+        x=0;
+        y=0;
     }
 
     private void readFromParcel(Parcel in) {

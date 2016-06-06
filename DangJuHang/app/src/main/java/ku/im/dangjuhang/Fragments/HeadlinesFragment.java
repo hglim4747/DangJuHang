@@ -29,6 +29,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import ku.im.dangjuhang.Client;
 import ku.im.dangjuhang.Hangsa;
 import ku.im.dangjuhang.HangsaAdapter;
 import ku.im.dangjuhang.MainActivity;
@@ -98,6 +99,19 @@ public class HeadlinesFragment extends ListFragment {
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             arrayList = mXMLParser.getArray();
+
+            for(int i=0; i<arrayList.size(); i++)
+            {
+                Double[] v = new Double[2];
+                Double[] v1 = new Double[2];
+                boolean success = new Client().SearchPlace(arrayList.get(i).getplace(), v, v1);
+                if(success)
+                {
+                    arrayList.get(i).x =  v[0].doubleValue();
+                    arrayList.get(i).y = v1[0].doubleValue();
+                }
+            }
+
             adapter = new HangsaAdapter(getActivity(),android.R.layout.simple_list_item_1,arrayList);
             setListAdapter(adapter);
         }
