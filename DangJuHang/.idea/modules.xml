@@ -6,7 +6,9 @@
       <module fileurl="file://$PROJECT_DIR$/3rdparty_login_library_android_4.1.4_source/3rdparty_login_library_android_4.1.4_source.iml" filepath="$PROJECT_DIR$/3rdparty_login_library_android_4.1.4_source/3rdparty_login_library_android_4.1.4_source.iml" />
       <module fileurl="file://$PROJECT_DIR$/DangJuHang.iml" filepath="$PROJECT_DIR$/DangJuHang.iml" />
       <module fileurl="file://$PROJECT_DIR$/apache-httpcomponents-httpclient/apache-httpcomponents-httpclient.iml" filepath="$PROJECT_DIR$/apache-httpcomponents-httpclient/apache-httpcomponents-httpclient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apache-httpcomponents-httpclient/apache-httpcomponents-httpclient.iml" filepath="$PROJECT_DIR$/apache-httpcomponents-httpclient/apache-httpcomponents-httpclient.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/httpcore-4.1.2/httpcore-4.1.2.iml" filepath="$PROJECT_DIR$/httpcore-4.1.2/httpcore-4.1.2.iml" />
       <module fileurl="file://$PROJECT_DIR$/httpcore-4.1.2/httpcore-4.1.2.iml" filepath="$PROJECT_DIR$/httpcore-4.1.2/httpcore-4.1.2.iml" />
       <module fileurl="file://$PROJECT_DIR$/nmaps/nmaps.iml" filepath="$PROJECT_DIR$/nmaps/nmaps.iml" />
     </modules>

@@ -18,10 +18,6 @@ import android.view.View;
 
 import ku.im.dangjuhang.Fragments.ArticleFragment;
 import ku.im.dangjuhang.Fragments.HeadlinesFragment;
-import ku.im.dangjuhang.Fragments.LikeFrag;
-import ku.im.dangjuhang.Fragments.MapFrag;
-import ku.im.dangjuhang.Fragments.MyFrag;
-import ku.im.dangjuhang.Fragments.RcmFrag;
 import ku.im.dangjuhang.Fragments.RegFrag;
 
 
@@ -131,42 +127,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         int id = item.getItemId();
         if (id == R.id.user) {
-            MyFrag myFrag = new MyFrag();
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_fragment, myFrag);
-            fragmentTransaction.commit();
-            // 내 상태 정보
+            //내가 등록한 행사들 나열
         }
         else if (id == R.id.search) {
 
         } // 검색
         else if (id == R.id.like) {
-            LikeFrag likeFrag = new LikeFrag();
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_fragment, likeFrag);
-            fragmentTransaction.commit();
-
-        }// 좋아요 했어
+            //여기서는 어댑터를 바꿔줘야 한다잉
+        }// 좋아요
         else if (id == R.id.rcm) {
-            RcmFrag rcmFrag = new RcmFrag();
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_fragment, rcmFrag);
-            fragmentTransaction.commit();
-
-        }// 추천해줘
+            //여기서는 어댑터를 바꿔줘야 한다잉
+        }// 추천
         else if (id == R.id.reg) {
             RegFrag regFrag = new RegFrag();
-            fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_fragment, regFrag);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
-
-        }// 등록했어
+            //등록페이지
+        }// 등록
         else if (id == R.id.news) {
-            HeadlinesFragment firstFragment = new HeadlinesFragment();
-            firstFragment.setArguments(getIntent().getExtras());
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_fragment, firstFragment);
-            fragmentTransaction.commit();
+            //여기서는 어댑터를 바꿔줘야 한다잉
         }//최신
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
