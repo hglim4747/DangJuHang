@@ -18,6 +18,7 @@ import android.view.View;
 
 import ku.im.dangjuhang.Fragments.ArticleFragment;
 import ku.im.dangjuhang.Fragments.HeadlinesFragment;
+import ku.im.dangjuhang.Fragments.RegFrag;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HeadlinesFragment.OnArticleSelectedListener {
@@ -138,6 +139,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //여기서는 어댑터를 바꿔줘야 한다잉
         }// 추천
         else if (id == R.id.reg) {
+            RegFrag regFrag = new RegFrag();
+            fragmentTransaction.replace(R.id.container_fragment, regFrag);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
             //등록페이지
         }// 등록
         else if (id == R.id.news) {

@@ -108,7 +108,7 @@ public class RegFrag_viewpager1 extends Fragment {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             // TODO Auto-generated method stub
-            String msg = String.format("%d : %d", year, hourOfDay, minute);
+            String msg = String.format("%d : %d", hourOfDay, minute);
                 starttimeEdit.setText(msg);
         }
     };
