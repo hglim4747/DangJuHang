@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="20dp"
+    tools:context="ku.im.dangjuhang.MainActivity"
+    android:baselineAligned="false">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="5dp"
+       >
+        <TextView
+            android:text="이름    "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13pt"/>
+        <EditText
+            android:id="@+id/regfrag_name"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="@drawable/edit_style"
+            android:hint="20자 이내"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="5dp"
+       >
+        <TextView
+            android:text="장소    "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13pt"/>
+        <EditText
+            android:id="@+id/regfrag_Address"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="@drawable/edit_style"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="5dp"
+       >
+        <TextView
+            android:text="기간    "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13pt"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="3dp">
+            <EditText
+                android:id="@+id/regfrag_edit_startdate"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:hint="시작날짜" />
+            <EditText
+                android:id="@+id/regfrag_edit_enddate"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:hint="종료날짜" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="3dp">
+            <Button
+                android:id="@+id/startdatebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OPEN" />
+            <Button
+                android:id="@+id/enddatebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CLOSE" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        >
+        <TextView
+            android:text="시간    "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13pt"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="3dp">
+            <EditText
+                android:id="@+id/regfrag_edit_starttime"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:hint="개장시간" />
+            <EditText
+                android:id="@+id/regfrag_edit_endtime"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:hint="폐점시간" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="3dp">
+            <Button
+                android:id="@+id/starttimebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OPEN" />
+            <Button
+                android:id="@+id/endtimebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CLOSE" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
+        <TextView
+            android:textSize="11pt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다음장에 마저 입력하세용"/>
+        <TextView
+            android:textSize="13pt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="▷▶▷▶▷"/>
+    </LinearLayout>
+</LinearLayout>
