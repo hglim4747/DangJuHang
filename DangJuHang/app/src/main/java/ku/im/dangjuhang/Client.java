@@ -9,10 +9,12 @@ import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
 import org.json.JSONException;
@@ -27,6 +29,8 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Gyu on 2016-05-23.
@@ -117,7 +121,7 @@ public class Client {
         protected String doInBackground(String... params) {
             String url = null;
             try {
-                url = "https://openapi.naver.com/v1/map/geocode?encoding=utf-8&coord=latlng&output=json&query=" + URLEncoder.encode(params[0], "EUC-KR");
+                url = "https://openapi.naver.com/v1/map/geocode?encoding=utf-8&coord=latlng&output=xml&query=" + URLEncoder.encode(params[0], "EUC-KR");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -142,16 +146,33 @@ public class Client {
         }
     };
 
-    boolean SearchCoord(String search, Float lat, Float longi)
+    boolean SearchPlace(String search, Double lat[], Double longi[])
     {
-        new RequestPlace().execute(search);
-        new RequestCoord().execute(search);
+        String page = "";
+        HashMap<String, String> getSearchData = new HashMap<>();
+        HashMap<String, String> getCoordData = new HashMap<>();
+
+        try {
+            page = new RequestPlace().execute(search).get();
+            XMLParsing(page, getSearchData);
+            if(getSearchData.size() <= 0) return false;
+            if(getSearchData.get("address") == null) return false;
+            page = new RequestCoord().execute(getSearchData.get("address")).get();
+            XMLParsing(page, getCoordData);
+            if(getCoordData.size() <= 0) return false;
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        lat[0] = Double.parseDouble(getCoordData.get("x"));
+        longi[0] = Double.parseDouble(getCoordData.get("y"));
         return true;
     }
 
-    String XMLParsing(String content)
+    boolean XMLParsing(String content, HashMap<String, String> getData)
     {
-        String result = "";
         XmlPullParserFactory factory = null;
         XmlPullParser xpp;
         int eventType;
@@ -174,7 +195,7 @@ public class Client {
                 }else if(eventType==XmlPullParser.TEXT){
                     if(bSet){
                         String data = xpp.getText();
-                        result += (tag_name + " : " + data+"\n");
+                        getData.put(tag_name, data);
                         bSet = false;
                     }
                 }else if(eventType==XmlPullParser.END_TAG){
@@ -186,7 +207,7 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return result;
+        return true;
     }
 
     private class RequestApiTask extends AsyncTask<Void, Void, String> {
@@ -199,8 +220,8 @@ public class Client {
             String at = mOAuthLoginModule.getAccessToken(context);
 
             String content = mOAuthLoginModule.requestApi(context, at, url);
-            String result = XMLParsing(content);
-            return result;
+            //String result = XMLParsing(content, getData);
+            return "default";
         }
         protected void onPostExecute(String content) {
 //            Toast.makeText(context, content, Toast.LENGTH_LONG).show();

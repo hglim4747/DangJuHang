@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         init(savedInstanceState);
         new Client().NaverLogin(this);
-        new Client().SearchCoord("건국대학교", null, null);
+        //new Client().SearchPlace("건국대학교", null, null);
     }
 
     void init(Bundle savedInstanceState){

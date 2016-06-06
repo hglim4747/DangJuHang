@@ -42,7 +42,7 @@ public class HeadlinesFragment extends ListFragment {
     ListView listView;
     ArrayList<Hangsa> arrayList = new ArrayList<Hangsa>();
     String Url;
-    SeoulXMLParser mXMLParser;
+    public static SeoulXMLParser mXMLParser;
 
     @Override
     public void onAttach(Activity activity) {
