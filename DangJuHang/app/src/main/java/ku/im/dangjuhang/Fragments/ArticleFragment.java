@@ -2,8 +2,6 @@ package ku.im.dangjuhang.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
@@ -26,6 +25,7 @@ public class ArticleFragment extends Fragment {
     String Url;
     Hangsa hangsa;
     ArrayList<Hangsa> arrayList;
+    ToggleButton toggleButton;
     //public static SeoulXMLParser mXMLParser;
 
     @Override
@@ -44,15 +44,29 @@ public class ArticleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 // return super.onCreateView(inflater, container, savedInstanceState);
-
+        View v =inflater.inflate(R.layout.fragment2, container, false);
         if (savedInstanceState != null) {
             mCurrentPosition = savedInstanceState.getInt(ARG_POSITION);
         }
         hangsa = new Hangsa();
         arrayList =  new ArrayList<Hangsa>();
+        toggleButton = (ToggleButton)v.findViewById(R.id.wanna);
+        toggleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toggleButton.isChecked()) {
+                    //좋아요 추가
+                    new Client().LikeEvent(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode(),20);
+                    Toast.makeText(getActivity(),SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode().toString(),Toast.LENGTH_SHORT).show();
+                } else {
+                    new Client().CancelLike(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode());
+                    //좋아요 취소
+                }
+            }
+        });
        // hangsa = arrayList.get(mCurrentPosition);
 
-        return inflater.inflate(R.layout.fragment2, container, false);
+        return v;
     }
     @Override
     public void onStart() {

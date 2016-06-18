@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import ku.im.dangjuhang.Hangsa;
 import ku.im.dangjuhang.R;
@@ -48,9 +47,8 @@ public class RegFrag_viewpager2 extends Fragment{
         regbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Hangsa hangsa = new Hangsa(name,startdate,enddate,time,address,null,
-                        null,null,null,explane.getText().toString());
+                        null,null,null,explane.getText().toString(),null);
                 //new Client().ResigterHangsa(hangsa);
             }
         });
