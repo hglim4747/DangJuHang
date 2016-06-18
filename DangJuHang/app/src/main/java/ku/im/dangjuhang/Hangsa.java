@@ -18,6 +18,7 @@ public class Hangsa implements Parcelable{
     String muse_fee;
     String minquiry;
     String mcontents;
+    String mcultcode;
 
     public double x,y;
 
@@ -25,7 +26,8 @@ public class Hangsa implements Parcelable{
                   String end_date, String time,
                   String place, String org_link,
                   String main_img, String use_fee,
-                  String inquiry, String contents) {
+                  String inquiry, String contents,
+                  String cultcode) {
         mtitle = title.replace("&#39;","");
         mstart_date = start_date.replace("&#39;","");
         mend_date = end_date.replace("&#39;","");
@@ -36,6 +38,7 @@ public class Hangsa implements Parcelable{
         muse_fee = use_fee.replace("&#39;","");
         minquiry = inquiry.replace("&#39;","");
         mcontents = contents.replace("&#39;","");
+        mcultcode = cultcode.replace("&#39", "");
 
         x=0;
         y=0;
@@ -52,6 +55,7 @@ public class Hangsa implements Parcelable{
         muse_fee = in.readString();
         minquiry = in.readString();
         mcontents = in.readString();
+        mcultcode = in.readString();
     }
 
     public Hangsa(Parcel in) {
@@ -59,38 +63,6 @@ public class Hangsa implements Parcelable{
     }
 
     public Hangsa() {}
-
-    public String getTitle() {
-        return mtitle;
-    }
-
-    public void settitle(String title) {
-        mtitle = title;
-    }
-
-    public String gettime() {
-        return mtime;
-    }
-
-    public String getplace() {
-        return mplace;
-    }
-
-    public String getimg() {
-        return mmain_img;
-    }
-
-    public String getcontents() {
-        return mcontents;
-    }
-
-    public String getmain_img() {
-        return mmain_img;
-    }
-
-    public void setmain_img(String img) {
-        mmain_img = img;
-    }
 
     @Override
     public int describeContents() {
@@ -109,6 +81,7 @@ public class Hangsa implements Parcelable{
         dest.writeString(muse_fee);
         dest.writeString(minquiry);
         dest.writeString(mcontents);
+        dest.writeString(mcultcode);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -123,4 +96,92 @@ public class Hangsa implements Parcelable{
             return new Hangsa[size];
         }
     };
+
+    public String getMtitle() {
+        return mtitle;
+    }
+
+    public void setMtitle(String mtitle) {
+        this.mtitle = mtitle;
+    }
+
+    public String getMstart_date() {
+        return mstart_date;
+    }
+
+    public void setMstart_date(String mstart_date) {
+        this.mstart_date = mstart_date;
+    }
+
+    public String getMend_date() {
+        return mend_date;
+    }
+
+    public void setMend_date(String mend_date) {
+        this.mend_date = mend_date;
+    }
+
+    public String getMtime() {
+        return mtime;
+    }
+
+    public void setMtime(String mtime) {
+        this.mtime = mtime;
+    }
+
+    public String getMplace() {
+        return mplace;
+    }
+
+    public void setMplace(String mplace) {
+        this.mplace = mplace;
+    }
+
+    public String getMorg_link() {
+        return morg_link;
+    }
+
+    public void setMorg_link(String morg_link) {
+        this.morg_link = morg_link;
+    }
+
+    public String getMmain_img() {
+        return mmain_img;
+    }
+
+    public void setMmain_img(String mmain_img) {
+        this.mmain_img = mmain_img;
+    }
+
+    public String getMuse_fee() {
+        return muse_fee;
+    }
+
+    public void setMuse_fee(String muse_fee) {
+        this.muse_fee = muse_fee;
+    }
+
+    public String getMinquiry() {
+        return minquiry;
+    }
+
+    public void setMinquiry(String minquiry) {
+        this.minquiry = minquiry;
+    }
+
+    public String getMcontents() {
+        return mcontents;
+    }
+
+    public void setMcontents(String mcontents) {
+        this.mcontents = mcontents;
+    }
+
+    public String getMcultcode() {
+        return mcultcode;
+    }
+
+    public void setMcultcode(String mcultcode) {
+        this.mcultcode = mcultcode;
+    }
 }
