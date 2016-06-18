@@ -4,6 +4,11 @@ package ku.im.dangjuhang;
  * Created by kim on 2016-05-26.
 */
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.renderscript.ScriptGroup;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +16,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -28,19 +36,19 @@ public class HangsaAdapter extends ArrayAdapter<Hangsa> {
     @Override
     public View getView(int position, View convertview, ViewGroup parent){
         View v = convertview;
+
         if( v == null){
             LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = vi.inflate(R.layout.row, null);
         }
 
-        Hangsa p = items.get(position);
-        if (p != null){
-            ImageView ii = (ImageView)v.findViewById(R.id.row_img);
-            TextView bt = (TextView)v.findViewById(R.id.row_text);
-            ii.setImageResource(p.getImagersc());
-            bt.setText(p.getContent());
+        final Hangsa p = items.get(position);
+        ImageView ii = (ImageView)v.findViewById(R.id.row_img);
+        TextView bt = (TextView)v.findViewById(R.id.row_text);
+        bt.setText(p.getTitle());
 
-        }
+        new DownloadImageTask(ii).execute(p.getmain_img());
+
         return v;
     }
 }

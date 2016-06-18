@@ -146,6 +146,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //등록페이지
         }// 등록
         else if (id == R.id.news) {
+            fragmentManager = getFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+
+            HeadlinesFragment firstFragment = new HeadlinesFragment();
+            firstFragment.setArguments(getIntent().getExtras());
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, firstFragment)
+                    .commit();
             //여기서는 어댑터를 바꿔줘야 한다잉
         }//최신
 
