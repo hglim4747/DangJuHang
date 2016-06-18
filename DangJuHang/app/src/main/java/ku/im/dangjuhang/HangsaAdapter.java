@@ -45,9 +45,9 @@ public class HangsaAdapter extends ArrayAdapter<Hangsa> {
         final Hangsa p = items.get(position);
         ImageView ii = (ImageView)v.findViewById(R.id.row_img);
         TextView bt = (TextView)v.findViewById(R.id.row_text);
-        bt.setText(p.getTitle());
+        bt.setText(p.getMtitle());
 
-        new DownloadImageTask(ii).execute(p.getmain_img());
+        new DownloadImageTask(ii).execute(p.getMmain_img());
 
         return v;
     }

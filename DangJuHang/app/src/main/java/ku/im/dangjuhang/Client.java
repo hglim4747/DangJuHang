@@ -41,6 +41,47 @@ public class Client {
     Context context;
     DefaultHttpClient httpClient = new DefaultHttpClient();
 
+    public boolean RegisterEvent( Hangsa h )
+    {
+        return true;
+    }
+
+    public boolean CancelEvent( String hangsaID )
+    {
+        return true;
+    }
+
+    public boolean LikeEvent( String hangsaID, int age )
+    {
+        return true;
+    }
+
+    public boolean CancelLike( String hangsaID )
+    {
+        return true;
+    }
+
+    public JSONObject GetLikeNum( String hangsaID )
+    {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("0","1");
+            obj.put("1","5");
+            obj.put("2","9");
+            obj.put("3","2");
+            obj.put("4","1");
+            obj.put("5","0");
+            obj.put("6","1");
+            obj.put("7","0");
+            obj.put("8","0");
+            obj.put("9","0");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+
+
     class MyAuthHandler extends OAuthLoginHandler
     {
         @Override

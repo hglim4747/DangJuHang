@@ -101,7 +101,7 @@ public class MapActivity extends NMapActivity  {
             double y = list.get(i).y;
             if(x > 0 && y > 0)
             {
-                poiData.addPOIitem(x, y, list.get(i).getTitle(), markerId, 0);
+                poiData.addPOIitem(x, y, list.get(i).getMtitle(), markerId, 0);
             }
         }
 
