@@ -2,7 +2,6 @@ package ku.im.dangjuhang;
 
 import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -113,6 +112,11 @@ public class SeoulXMLParser extends XMLParser implements Runnable{
 
     public ArrayList<Hangsa> getArray() {
         return mDataList;
+    }
+    public Hangsa getHangsa(int postition){
+        ArrayList<Hangsa> a = this.getArray();
+        Hangsa hangsa = a.get(postition);
+        return hangsa;
     }
 
     public void run() {

@@ -36,6 +36,9 @@ import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
 import com.nhn.android.mapviewer.overlay.NMapResourceProvider;
 
+import java.util.ArrayList;
+
+import ku.im.dangjuhang.Fragments.HeadlinesFragment;
 import ku.im.dangjuhang.Fragments.NMap.NMapPOIflagType;
 import ku.im.dangjuhang.Fragments.NMap.NMapViewer;
 import ku.im.dangjuhang.Fragments.NMap.NMapViewerResourceProvider;
@@ -59,6 +62,8 @@ public class MapActivity extends NMapActivity  {
     private NMapCompassManager mMapCompassManager;
     private NMapMyLocationOverlay mMyLocationOverlay;
     NMapPOIdataOverlay poiDataOverlay;
+
+    SeoulXMLParser mXMLParser;
     /**
      * Called when the activity is first created.
      */
@@ -66,6 +71,9 @@ public class MapActivity extends NMapActivity  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        mXMLParser = HeadlinesFragment.mXMLParser;
+
         mMapView = (NMapView) findViewById(R.id.mapView);
         mMapView.setClientId(CLIENT_ID);
 
@@ -83,10 +91,20 @@ public class MapActivity extends NMapActivity  {
         mOverlayManager = new NMapOverlayManager(this, mMapView, mMapViewerResourceProvider);
 
         int markerId = NMapPOIflagType.PIN;
-        NMapPOIdata poiData = new NMapPOIdata(2, mMapViewerResourceProvider);
-        poiData.beginPOIdata(2);
-        poiData.addPOIitem(127.0630205, 37.5091300, "Pizza 777-111", markerId, 0);
-        poiData.addPOIitem(127.061, 37.51, "Pizza 123-456", markerId, 0);
+        NMapPOIdata poiData = new NMapPOIdata(100, mMapViewerResourceProvider);
+        poiData.beginPOIdata(5);
+
+        ArrayList<Hangsa> list = mXMLParser.getArray();
+        for(int i=0; i<list.size(); i++)
+        {
+            double x = list.get(i).x;
+            double y = list.get(i).y;
+            if(x > 0 && y > 0)
+            {
+                poiData.addPOIitem(x, y, list.get(i).getTitle(), markerId, 0);
+            }
+        }
+
         poiData.endPOIdata();
         poiDataOverlay = mOverlayManager.createPOIdataOverlay(poiData, null);
         poiDataOverlay.showAllPOIdata(0);

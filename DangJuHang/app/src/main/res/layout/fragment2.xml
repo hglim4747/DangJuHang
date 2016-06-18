@@ -22,5 +22,12 @@
             android:textSize="14pt"
             android:textAlignment="center"
             android:text="여기에 정보 띄우쟝"/>
+    <ToggleButton
+        android:id="@+id/toggle"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="가볼가"
+        android:textOn="가볼가"/>
 
 </LinearLayout>

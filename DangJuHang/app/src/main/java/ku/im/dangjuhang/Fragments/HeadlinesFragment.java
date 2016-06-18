@@ -2,37 +2,17 @@ package ku.im.dangjuhang.Fragments;
 
 import android.app.Activity;
 import android.app.ListFragment;
-import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.renderscript.ScriptGroup;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringBufferInputStream;
-import java.io.StringReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import ku.im.dangjuhang.Client;
 import ku.im.dangjuhang.Hangsa;
 import ku.im.dangjuhang.HangsaAdapter;
-import ku.im.dangjuhang.MainActivity;
-import ku.im.dangjuhang.R;
 import ku.im.dangjuhang.SeoulXMLParser;
 
 public class HeadlinesFragment extends ListFragment {
@@ -42,7 +22,7 @@ public class HeadlinesFragment extends ListFragment {
     ListView listView;
     ArrayList<Hangsa> arrayList = new ArrayList<Hangsa>();
     String Url;
-    SeoulXMLParser mXMLParser;
+    public static SeoulXMLParser mXMLParser;
 
     @Override
     public void onAttach(Activity activity) {
@@ -57,11 +37,12 @@ public class HeadlinesFragment extends ListFragment {
         super.onListItemClick(l, v, position, id);
         mListner.onArticleSelected(position);
         listView.setItemChecked(position,true);
+
     }//itemClick 리스너를 달아줌
 
     public interface OnArticleSelectedListener{
         public void onArticleSelected(int position);
-    }
+    }//외않되?
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,6 +79,18 @@ public class HeadlinesFragment extends ListFragment {
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             arrayList = mXMLParser.getArray();
+
+            for(int i=0; i<arrayList.size(); i++)
+            {
+                Double[] v = new Double[2];
+                Double[] v1 = new Double[2];
+                boolean success = new Client().SearchPlace(arrayList.get(i).getplace(), v, v1);
+                if(success)
+                {
+                    arrayList.get(i).x =  v[0].doubleValue();
+                    arrayList.get(i).y = v1[0].doubleValue();
+                }
+            }
             adapter = new HangsaAdapter(getActivity(),android.R.layout.simple_list_item_1,arrayList);
             setListAdapter(adapter);
         }

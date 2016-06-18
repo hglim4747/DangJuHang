@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         init(savedInstanceState);
         new Client().NaverLogin(this);
-        new Client().SearchCoord("건국대학교", null, null);
+        //new Client().SearchPlace("건국대학교", null, null);
     }
 
     void init(Bundle savedInstanceState){
@@ -133,9 +133,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } // 검색
         else if (id == R.id.like) {
+            fragmentManager = getFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+
+            HeadlinesFragment firstFragment = new HeadlinesFragment();
+            firstFragment.setArguments(getIntent().getExtras());
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, firstFragment)
+                    .commit();
             //여기서는 어댑터를 바꿔줘야 한다잉
         }// 좋아요
         else if (id == R.id.rcm) {
+            fragmentManager = getFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+
+            HeadlinesFragment firstFragment = new HeadlinesFragment();
+            firstFragment.setArguments(getIntent().getExtras());
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, firstFragment)
+                    .commit();
             //여기서는 어댑터를 바꿔줘야 한다잉
         }// 추천
         else if (id == R.id.reg) {
