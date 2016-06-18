@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ public class ArticleFragment extends Fragment {
     String Url;
     Hangsa hangsa;
     ArrayList<Hangsa> arrayList;
-    public static SeoulXMLParser mXMLParser;
+    //public static SeoulXMLParser mXMLParser;
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -76,10 +77,12 @@ public class ArticleFragment extends Fragment {
 
             //hangsa = mXMLParser.getHansa(position);
             //hangsa.getTitle() 등등 해주며 ㄴ되는건데...
-            readxml(position);
+            //readxml(position);
+
             mCurrentPosition = position;
-            new DownloadImageTask(articleimg).execute(mXMLParser.getArray().get(position).getmain_img());
-            articletext.setText(mXMLParser.getArray().get(position).getTitle());
+            new DownloadImageTask(articleimg).execute(SeoulXMLParser.getArray().get(position).getMmain_img());
+            articletext.setText(SeoulXMLParser.getArray().get(position).getMtitle());
+            Toast.makeText(getActivity(), SeoulXMLParser.getArray().get(position).getMcultcode(),Toast.LENGTH_SHORT).show();
 
             // Toast.makeText(getActivity(), Integer.toString(mCurrentPosition), Toast.LENGTH_SHORT).show();
 
@@ -88,42 +91,32 @@ public class ArticleFragment extends Fragment {
         }
     }
 
-    public void readxml(int pos) {
-        try {
-            String serviceUrl = "http://openAPI.seoul.go.kr:8088/";
-            String serviceKey = "70515570556d697235305778726e58/"; // 필수
-            String serviceType = "xml/"; // 필수
-            String service ="SearchConcertDetailService/"; //필수
-            String start_index = Integer.toString(pos) + "/"; //필수
-            String end_index = Integer.toString(pos); //필수
+//    public void readxml(int pos) {
+//        try {
+//            String serviceUrl = "http://openAPI.seoul.go.kr:8088/";
+//            String serviceKey = "70515570556d697235305778726e58/"; // 필수
+//            String serviceType = "xml/"; // 필수
+//            String service ="SearchConcertDetailService/"; //필수
+//            String start_index = Integer.toString(pos) + "/"; //필수
+//            String end_index = Integer.toString(pos); //필수
+//
+//            try {
+//                Url = serviceUrl+serviceKey+serviceType+service+start_index+end_index;
+//                mXMLParser = new SeoulXMLParser(Url,handler);
+//                Thread thread = new Thread(mXMLParser);
+//                thread.start();
+//            }catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    Handler handler = new Handler() {
+//        public void handleMessage(Message msg) {
+//            arrayList = mXMLParser.getArray();
+//        }
+//    };
 
-            try {
-                Url = serviceUrl+serviceKey+serviceType+service+start_index+end_index;
-                mXMLParser = new SeoulXMLParser(Url,handler);
-                Thread thread = new Thread(mXMLParser);
-                thread.start();
-            }catch (Exception e) {
-                e.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    Handler handler = new Handler() {
-        public void handleMessage(Message msg) {
-            arrayList = mXMLParser.getArray();
-            for(int i=0; i<arrayList.size(); i++)
-            {
-                Double[] v = new Double[2];
-                Double[] v1 = new Double[2];
-                boolean success = new Client().SearchPlace(arrayList.get(i).getplace(), v, v1);
-                if(success)
-                {
-                    arrayList.get(i).x =  v[0].doubleValue();
-                    arrayList.get(i).y = v1[0].doubleValue();
-                }
-            }
-        }
-    };
 }

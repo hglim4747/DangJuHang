@@ -48,10 +48,6 @@ public class HeadlinesFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         readxml();
-
-        //arrayList.add(new Hangsa(R.drawable.a,"1번리스트"));
-
-        //HealinesFragment 자체가 listview 라 이렇게 달아줘도 됨
     }
 
     public void readxml() {
@@ -61,7 +57,7 @@ public class HeadlinesFragment extends ListFragment {
             String serviceType = "xml/"; // 필수
             String service ="SearchConcertDetailService/"; //필수
             String start_index = "1/"; //필수
-            String end_index = "8"; //필수
+            String end_index = "3"; //필수
 
             try {
                 Url = serviceUrl+serviceKey+serviceType+service+start_index+end_index;
@@ -80,17 +76,6 @@ public class HeadlinesFragment extends ListFragment {
         public void handleMessage(Message msg) {
             arrayList = mXMLParser.getArray();
 
-            for(int i=0; i<arrayList.size(); i++)
-            {
-                Double[] v = new Double[2];
-                Double[] v1 = new Double[2];
-                boolean success = new Client().SearchPlace(arrayList.get(i).getplace(), v, v1);
-                if(success)
-                {
-                    arrayList.get(i).x =  v[0].doubleValue();
-                    arrayList.get(i).y = v1[0].doubleValue();
-                }
-            }
             adapter = new HangsaAdapter(getActivity(),android.R.layout.simple_list_item_1,arrayList);
             setListAdapter(adapter);
         }

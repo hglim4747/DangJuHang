@@ -25,6 +25,7 @@ public class SeoulXMLParser extends XMLParser implements Runnable{
     String muse_fee;
     String minquiry;
     String mcontents;
+    String mcultcode;
 
     public SeoulXMLParser(String addr, Handler handler) {
         super(addr);
@@ -71,6 +72,8 @@ public class SeoulXMLParser extends XMLParser implements Runnable{
                                 tagIdentifier = 9;
                             }else if(tag.equals("CONTENTS")) {
                                 tagIdentifier = 10;
+                            }else if(tag.equals("CULTCODE")) {
+                                tagIdentifier = 11;
                             }
                             break;
                         case XmlPullParser.END_TAG:
@@ -94,9 +97,11 @@ public class SeoulXMLParser extends XMLParser implements Runnable{
                                 muse_fee = parser.getText().trim();
                             }else if(tagIdentifier == 9) {
                                 minquiry = parser.getText().trim();
-                            }else if(tagIdentifier == 10) {
+                            }else if (tagIdentifier == 11) {
+                                mcultcode = parser.getText().trim();
+                            } else if(tagIdentifier == 10) {
                                 mcontents = parser.getText().trim();
-                                Hangsa data = new Hangsa(mtitle,mstart_date,mend_date,mtime,mplace,morg_link,mmain_img,muse_fee,minquiry,mcontents);
+                                Hangsa data = new Hangsa(mtitle,mstart_date,mend_date,mtime,mplace,morg_link,mmain_img,muse_fee,minquiry,mcontents,mcultcode);
                                 mDataList.add(data);
                             }
                             tagIdentifier = 0;
@@ -110,7 +115,7 @@ public class SeoulXMLParser extends XMLParser implements Runnable{
         }
     }
 
-    public ArrayList<Hangsa> getArray() {
+    public static ArrayList<Hangsa> getArray() {
         return mDataList;
     }
     public Hangsa getHangsa(int postition){
@@ -119,8 +124,23 @@ public class SeoulXMLParser extends XMLParser implements Runnable{
         return hangsa;
     }
 
+    @Override
     public void run() {
         startParsing();
+        ArrayList<Hangsa> arrayList = this.getArray();
+
+        for(int i=0; i<arrayList.size(); i++)
+        {
+            Double[] v = new Double[2];
+            Double[] v1 = new Double[2];
+            boolean success = new Client().SearchPlace(arrayList.get(i).getMplace(), v, v1);
+            if(success)
+            {
+                arrayList.get(i).x =  v[0].doubleValue();
+                arrayList.get(i).y = v1[0].doubleValue();
+            }
+        }
+
         mHandler.sendEmptyMessage(0);
     }
 
