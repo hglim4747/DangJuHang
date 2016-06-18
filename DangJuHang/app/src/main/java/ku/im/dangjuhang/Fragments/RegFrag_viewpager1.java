@@ -24,7 +24,7 @@ import ku.im.dangjuhang.R;
  * Created by user on 2016-06-02.
  */
 public class RegFrag_viewpager1 extends Fragment {
-    EditText name , address, explane;
+    EditText name , address;
     int year, month, day, hour, minute;
     EditText startdateEdit, enddateEdit, starttimeEdit, endtimeEdit;
     Button startdatebtn, enddatebtn, starttimebtn, endtimebtn;
