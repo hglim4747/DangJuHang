@@ -104,7 +104,6 @@ public class RegFrag_viewpager2 extends Fragment{
                     Hangsa hangsa = new Hangsa(name2, startdate2, enddate2, time, address2, null,
                             null, null, null, explane, null);
 
-
                 String result = new Client().RegisterEvent(hangsa);
 
                 if(result != null) {
@@ -117,6 +116,7 @@ public class RegFrag_viewpager2 extends Fragment{
                     // 성공했습니다 토스트
                 }
                 else {
+
                         Toast.makeText(getActivity(), "등록실패ㅠㅠ", Toast.LENGTH_SHORT).show();
                     }
              }

@@ -14,19 +14,20 @@
         android:textSize="14pt"
         android:top="10dp"
         android:textAlignment="center"
-        android:text="여기에 정보 띄우쟝"/>
+        android:text="여기에 정보 띄우쟝"
+        android:layout_marginBottom="10dp"/>
         <ImageView
             android:id="@+id/fragment_img"
             android:layout_width="280dp"
             android:layout_height="200dp"
-            android:top="10dp"
             android:layout_gravity="center"
-            android:src="@drawable/user"/>
+            android:src="@drawable/no_img"/>
 
     <TextView
         android:id="@+id/fragment_where"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:textSize="10pt"
         android:textAlignment="center"
         android:text="여기에 장소 띄우쟝"/>
@@ -34,6 +35,7 @@
         android:id="@+id/fragment_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:textSize="10pt"
         android:textAlignment="center"
         android:text="여기에 날짜 띄우쟝"/>
@@ -51,6 +53,7 @@
         android:background="@drawable/toggle_bg"
         android:layout_width="100dp"
         android:layout_height="50dp"
+        android:layout_marginTop="20dp"
         android:textOn=""
         android:textOff=""
         />
