@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,13 +37,14 @@ import ku.im.dangjuhang.Request;
 public class RegFrag_viewpager2 extends Fragment{
     String name2, address2;
     String startdate2, enddate2, starttime2, endtime2 , time;
-    String cel,explane;
+    String cel,explane, imguri;
 
     Button regbtn, canclebtn,selectBtn;
     EditText telEdit, explaneEdit;
     public ImageView imageView;
 
     private static final int RESULT_SELECT_IMAGE = 1;
+
     RegFrag_viewpager1 page1;
     public RegFrag_viewpager2(){}
     public RegFrag_viewpager2(RegFrag_viewpager1 page1)
@@ -80,41 +82,44 @@ public class RegFrag_viewpager2 extends Fragment{
         regbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RegFrag_viewpager1  regfrag1 = page1;
-                name2= regfrag1.name.getText().toString();
-                address2= regfrag1.address.getText().toString();
-                startdate2= regfrag1.startdateEdit.getText().toString();
-                enddate2= regfrag1.enddateEdit.getText().toString();
-                starttime2= regfrag1.starttimeEdit.getText().toString();
-                endtime2= regfrag1.endtimeEdit.getText().toString();
-                time= startdate2+"~"+endtime2;
+                RegFrag_viewpager1 regfrag1 = page1;
+                name2 = regfrag1.name.getText().toString();
+                address2 = regfrag1.address.getText().toString();
+                startdate2 = regfrag1.startdateEdit.getText().toString();
+                enddate2 = regfrag1.enddateEdit.getText().toString();
+                starttime2 = regfrag1.starttimeEdit.getText().toString();
+                endtime2 = regfrag1.endtimeEdit.getText().toString();
+                time = startdate2 + "~" + endtime2;
                 cel = telEdit.getText().toString();
                 explane = explaneEdit.getText().toString();
 
 
+                if (TextUtils.isEmpty(name2) ||TextUtils.isEmpty(address2) ||TextUtils.isEmpty(startdate2) ||TextUtils.isEmpty(enddate2) ||
+                        TextUtils.isEmpty(starttime2) ||TextUtils.isEmpty(endtime2) ||TextUtils.isEmpty(cel) ||TextUtils.isEmpty(explane)){
+                    Toast.makeText(getActivity(), "전부 작성하였는지 \n다시한번 확인해주세요", Toast.LENGTH_SHORT).show();
+                }else {
+                    if(!TextUtils.isEmpty(imguri)){ // 사용자가 이미지를 선택했을 때때
 
-                Hangsa hangsa = new Hangsa(name2,startdate2,enddate2,time,address2,null,
-                        null,null,null,explane,null);
+                   }
+                    Hangsa hangsa = new Hangsa(name2, startdate2, enddate2, time, address2, null,
+                            null, null, null, explane, null);
+
 
                 String result = new Client().RegisterEvent(hangsa);
 
-                if(result != null)
-                {
+                if(result != null) {
                     //Client 코드 받아와서 이미지 이름으로 넣기
                     Bitmap image = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                     //execute the async task and upload the image to server
-                    new Upload(image,result).execute();
+                    new Upload(image, result).execute();
 
-                    Toast.makeText(getActivity(),"등록성공ㅎㅎ",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "등록성공ㅎㅎ", Toast.LENGTH_SHORT).show();
                     // 성공했습니다 토스트
                 }
-                else
-                {
-                    Toast.makeText(getActivity(),"등록실패ㅠㅠ",Toast.LENGTH_SHORT).show();
-
-                    // 실패했습니다 토스트
-                }
-
+                else {
+                        Toast.makeText(getActivity(), "등록실패ㅠㅠ", Toast.LENGTH_SHORT).show();
+                    }
+             }
             }
         });
 

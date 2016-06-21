@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import ku.im.dangjuhang.Client;
 import ku.im.dangjuhang.Hangsa;
 import ku.im.dangjuhang.HangsaAdapter;
+import ku.im.dangjuhang.MyRegAdapter;
 import ku.im.dangjuhang.R;
 
 /**
@@ -34,6 +35,7 @@ public class MyFrag extends Fragment{
     ArrayList<Hangsa> hangsaList;
     ArrayList<String> templist;
     ArrayAdapter<String> adapter;
+    MyRegAdapter myRegAdapter;
     AlertDialog alertDialog;
     HangsaAdapter hangsaAdapter;
     int clickPoint =-1;
@@ -45,18 +47,21 @@ public class MyFrag extends Fragment{
         return root;
     }
     void init(View v){
-        templist = new ArrayList<String>();
+    //    templist = new ArrayList<String>();
         hangsaList = new Client().GetMyEvent();
         if(hangsaList.size() <= 0){
             text = (TextView)v.findViewById(R.id.myfrag_NoHangsatext);
             text.setText("내가 등록한 행사가\n없습니다");
         }else {
             listView = (ListView)v.findViewById(R.id.myfrag_listview);
-            for (int i = 0; i < hangsaList.size(); i++) {
-                templist.add(hangsaList.get(i).getMtitle());
-            }
-            adapter = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_list_item_1, templist);
-            listView.setAdapter(adapter);
+//            for (int i = 0; i < hangsaList.size(); i++) {
+//                templist.add(hangsaList.get(i).getMtitle());
+//            }
+//
+            myRegAdapter = new MyRegAdapter(getActivity(),android.R.layout.simple_list_item_1,hangsaList);
+            listView.setAdapter(myRegAdapter);
+//          adapter = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_list_item_1, templist);
+//          listView.setAdapter(adapter);
 
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

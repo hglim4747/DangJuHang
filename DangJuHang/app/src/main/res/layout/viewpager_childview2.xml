@@ -42,7 +42,7 @@
         <EditText
             android:id="@+id/regfrag_Explane"
             android:layout_width="200dp"
-            android:layout_height="170dp"
+            android:layout_height="160dp"
             android:background="@drawable/edit_style" />
     </LinearLayout>
 
