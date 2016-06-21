@@ -1,2 +1,0 @@
-CHANGED,C:\git\DangJuHang\Lec08\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\miranlee\lec08\MainActivity$override.class
-CHANGED,C:\git\DangJuHang\Lec08\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class
