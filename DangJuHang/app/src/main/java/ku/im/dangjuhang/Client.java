@@ -156,6 +156,93 @@ public class Client {
         return jsonObject;
     }
 
+    public ArrayList<Hangsa> GetAllEvent()
+    {
+        if(userdata == null) return null;
+        JSONObject params = new JSONObject();
+
+        boolean result = false;
+        String t = request("get_all_event", params);
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(t);
+            result = jsonObject.getBoolean("result");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Hangsa> list = parseToHangsaList(jsonObject);
+        return list;
+    }
+
+    public ArrayList<Hangsa> GetMyEvent()
+    {
+        String userid = userdata.get("id");
+        if(userdata == null) return null;
+        JSONObject params = new JSONObject();
+        try {
+            params.put("userid", userid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        boolean result = false;
+        String t = request("get_my_event", params);
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(t);
+            result = jsonObject.getBoolean("result");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Hangsa> list = parseToHangsaList(jsonObject);
+        return list;
+    }
+
+    public ArrayList<Hangsa> parseToHangsaList(JSONObject jsonObject)
+    {
+        ArrayList<Hangsa> list = new ArrayList<Hangsa>();
+        int size = jsonObject.length();
+
+        try {
+            for (int i = 0; i < size - 1; i++) {
+                JSONObject row = jsonObject.getJSONObject(String.valueOf(i));
+                Hangsa hangsa = parseToHangsa(row);
+                list.add(hangsa);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public Hangsa parseToHangsa(JSONObject jsonObject)
+    {
+        Hangsa hangsa = null;
+        try {
+            String cultcode = jsonObject.getString("cultcode");
+            String userid = jsonObject.getString("userid");
+            String title = jsonObject.getString("title");
+            String start_date = jsonObject.getString("start_date");
+            String end_date = jsonObject.getString("end_date");
+            String time = jsonObject.getString("time");
+            String place = jsonObject.getString("place");
+            String org_link = jsonObject.getString("org_link");
+            String main_img = jsonObject.getString("main_img");
+            String use_fee = jsonObject.getString("use_fee");
+            String inquiry = jsonObject.getString("inquiry");
+            String contents = jsonObject.getString("contents");
+
+            hangsa = new Hangsa(title, start_date, end_date, time, place, org_link, main_img, use_fee, inquiry, contents, cultcode);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return hangsa;
+    }
+
     public String request(String func, JSONObject params)
     {
         httpClient.getParams().setParameter("http.protocol.content-charset", "UTF-8");

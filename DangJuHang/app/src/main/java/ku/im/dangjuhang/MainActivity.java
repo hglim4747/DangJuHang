@@ -38,11 +38,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(this, Client.userdata.get("name") + "님 환영합니다.\n연령 : " + Client.userdata.get("age")+"0대", Toast.LENGTH_LONG).show();
         }
 
-//        Hangsa hangsa = new Hangsa("제목","시작날","종료날","시간","서울특별시 성북구 하월곡동 88-63 101동 1301호",null,
-//                null,null,null,"설명",null);
+//        Hangsa hangsa = new Hangsa("제목","시작날","종료날","시간","서울특별시 성북구 하월곡동 88-63 101동 1301호",null,null,null,null,"설명",null);
 //        boolean result = new Client().RegisterEvent(hangsa);
 //        new Client().GetLikeNum("100");
-          new Client().GetLike(String.valueOf(77107));
+//        new Client().GetLike(String.valueOf(77107));
+        new Client().GetAllEvent();
+//        new Client().GetMyEvent();
 //        new Client().SearchPlace("건국대학교", null, null);
     }
 
