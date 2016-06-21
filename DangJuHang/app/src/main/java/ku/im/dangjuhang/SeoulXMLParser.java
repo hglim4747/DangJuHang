@@ -103,6 +103,7 @@ public class SeoulXMLParser extends XMLParser implements Runnable{
                                 mcontents = parser.getText().trim();
                                 Hangsa data = new Hangsa(mtitle,mstart_date,mend_date,mtime,mplace,morg_link,mmain_img,muse_fee,minquiry,mcontents,mcultcode);
                                 mDataList.add(data);
+                                data.updatePlace();
                             }
                             tagIdentifier = 0;
                             break;
@@ -127,20 +128,6 @@ public class SeoulXMLParser extends XMLParser implements Runnable{
     @Override
     public void run() {
         startParsing();
-        ArrayList<Hangsa> arrayList = this.getArray();
-
-        for(int i=0; i<arrayList.size(); i++)
-        {
-            Double[] v = new Double[2];
-            Double[] v1 = new Double[2];
-            boolean success = new Client().SearchPlace(arrayList.get(i).getMplace(), v, v1);
-            if(success)
-            {
-                arrayList.get(i).x =  v[0].doubleValue();
-                arrayList.get(i).y = v1[0].doubleValue();
-            }
-        }
-
         mHandler.sendEmptyMessage(0);
     }
 

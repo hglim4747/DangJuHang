@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by kim on 2016-04-17.
  */
-public class Hangsa implements Parcelable{
+public class Hangsa {
 
     String mtitle;
     String mstart_date;
@@ -59,44 +59,24 @@ public class Hangsa implements Parcelable{
         mcultcode = in.readString();
     }
 
+    public void updatePlace()
+    {
+        Double[] v = new Double[2];
+        Double[] v1 = new Double[2];
+        boolean success = new Client().SearchPlace(this.getMplace(), v, v1);
+        if(success)
+        {
+            this.x =  v[0].doubleValue();
+            this.y = v1[0].doubleValue();
+        }
+    }
+
     public Hangsa(Parcel in) {
         readFromParcel(in);
     }
 
     public Hangsa() {}
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mtitle);
-        dest.writeString(mstart_date);
-        dest.writeString(mend_date);
-        dest.writeString(mtime);
-        dest.writeString(mplace);
-        dest.writeString(morg_link);
-        dest.writeString(mmain_img);
-        dest.writeString(muse_fee);
-        dest.writeString(minquiry);
-        dest.writeString(mcontents);
-        dest.writeString(mcultcode);
-    }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-
-        @Override
-        public Hangsa createFromParcel(Parcel source) {
-            return new Hangsa(source);
-        }
-
-        @Override
-        public Hangsa[] newArray(int size) {
-            return new Hangsa[size];
-        }
-    };
 
     public String getMtitle() {
         return mtitle;
