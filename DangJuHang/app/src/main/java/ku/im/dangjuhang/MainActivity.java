@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import ku.im.dangjuhang.Fragments.ArticleFragment;
 import ku.im.dangjuhang.Fragments.HeadlinesFragment;
+import ku.im.dangjuhang.Fragments.HeadlinesFragmentForRec;
 import ku.im.dangjuhang.Fragments.RegFrag;
 
 
@@ -159,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentManager = getFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
 
-            HeadlinesFragment firstFragment = new HeadlinesFragment();
+            HeadlinesFragmentForRec firstFragment = new HeadlinesFragmentForRec();
             firstFragment.setArguments(getIntent().getExtras());
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, firstFragment)

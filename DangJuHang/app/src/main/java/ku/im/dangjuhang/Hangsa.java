@@ -19,7 +19,7 @@ public class Hangsa implements Parcelable{
     String minquiry;
     String mcontents;
     String mcultcode;
-
+    int likenum; // 소팅을 위한거랍니다.. 미안.. 추가해서 미안..꺄륵..
     public double x,y;
 
     public Hangsa(String title, String start_date,
@@ -184,5 +184,13 @@ public class Hangsa implements Parcelable{
 
     public void setMcultcode(String mcultcode) {
         this.mcultcode = mcultcode;
+    }
+
+    public int getLikenum() {
+        return likenum;
+    }
+
+    public void setLikenum(int likenum) {
+        this.likenum = likenum;
     }
 }

@@ -27,6 +27,7 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
@@ -153,8 +154,8 @@ public class Client {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return jsonObject;
-    }
+        return jsonObject; // 012345
+    } // 연령대 별 Like 수
 
     public ArrayList<Hangsa> GetAllEvent()
     {
