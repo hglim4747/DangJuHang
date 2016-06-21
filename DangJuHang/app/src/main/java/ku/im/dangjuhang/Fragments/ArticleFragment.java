@@ -20,41 +20,41 @@ import ku.im.dangjuhang.R;
 import ku.im.dangjuhang.SeoulXMLParser;
 
 public class ArticleFragment extends Fragment {
-    final static String ARG_POSITION = "position";
-    int mCurrentPosition = -1;
-    String Url;
-    Hangsa hangsa;
-    ArrayList<Hangsa> arrayList;
-    ToggleButton toggleButton;
-    //public static SeoulXMLParser mXMLParser;
+                    final static String ARG_POSITION = "position";
+                    int mCurrentPosition = -1;
+                    String Url;
+                    Hangsa hangsa;
+                    ArrayList<Hangsa> arrayList;
+                    ToggleButton toggleButton;
+                    //public static SeoulXMLParser mXMLParser;
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(ARG_POSITION, mCurrentPosition);
-    }
-    public static ArticleFragment newInstance(int position){
-        ArticleFragment articleFragment = new ArticleFragment();
-        Bundle args = new Bundle();
-        args.putInt(ArticleFragment.ARG_POSITION, position);
-        articleFragment.setArguments(args);
-        return articleFragment;
-    }
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+                    @Override
+                    public void onSaveInstanceState(Bundle outState) {
+                        super.onSaveInstanceState(outState);
+                        outState.putInt(ARG_POSITION, mCurrentPosition);
+                    }
+                    public static ArticleFragment newInstance(int position){
+                        ArticleFragment articleFragment = new ArticleFragment();
+                        Bundle args = new Bundle();
+                        args.putInt(ArticleFragment.ARG_POSITION, position);
+                        articleFragment.setArguments(args);
+                        return articleFragment;
+                    }
+                    @Nullable
+                    @Override
+                    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 // return super.onCreateView(inflater, container, savedInstanceState);
-        View v =inflater.inflate(R.layout.fragment2, container, false);
-        if (savedInstanceState != null) {
-            mCurrentPosition = savedInstanceState.getInt(ARG_POSITION);
-        }
-        hangsa = new Hangsa();
-        arrayList =  new ArrayList<Hangsa>();
-        toggleButton = (ToggleButton)v.findViewById(R.id.wanna);
-        toggleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (toggleButton.isChecked()) {
+                        View v =inflater.inflate(R.layout.fragment2, container, false);
+                        if (savedInstanceState != null) {
+                            mCurrentPosition = savedInstanceState.getInt(ARG_POSITION);
+                        }
+                        hangsa = new Hangsa();
+                        arrayList =  new ArrayList<Hangsa>();
+                        toggleButton = (ToggleButton)v.findViewById(R.id.wanna);
+                        toggleButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (toggleButton.isChecked()) {
                     //좋아요 추가
                     new Client().LikeEvent(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode(),20);
                     Toast.makeText(getActivity(),SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode().toString(),Toast.LENGTH_SHORT).show();
