@@ -56,7 +56,7 @@ public class ArticleFragment extends Fragment {
             public void onClick(View v) {
                 if (toggleButton.isChecked()) {
                     //좋아요 추가
-                    new Client().LikeEvent(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode(),20);
+                    new Client().LikeEvent(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode());
                     Toast.makeText(getActivity(),SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode().toString(),Toast.LENGTH_SHORT).show();
                 } else {
                     new Client().CancelLike(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode());

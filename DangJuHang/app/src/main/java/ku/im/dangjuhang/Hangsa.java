@@ -28,17 +28,18 @@ public class Hangsa implements Parcelable{
                   String main_img, String use_fee,
                   String inquiry, String contents,
                   String cultcode) {
-        mtitle = title.replace("&#39;","");
-        mstart_date = start_date.replace("&#39;","");
-        mend_date = end_date.replace("&#39;","");
-        mtime = time.replace("&#39;","");
-        mplace = place.replace("&#39;","");
-        morg_link = org_link.replace("&#39;","");
-        mmain_img = main_img.replace("&#39;","");
-        muse_fee = use_fee.replace("&#39;","");
-        minquiry = inquiry.replace("&#39;","");
-        mcontents = contents.replace("&#39;","");
-        mcultcode = cultcode.replace("&#39", "");
+
+        if(title != null) mtitle = title.replace("&#39;","");
+        if(start_date != null) mstart_date = start_date.replace("&#39;","");
+        if(end_date != null)  mend_date = end_date.replace("&#39;","");
+        if(time != null)  mtime = time.replace("&#39;","");
+        if(place != null)  mplace = place.replace("&#39;","");
+        if(org_link != null) morg_link = org_link.replace("&#39;","");
+        if(main_img != null)  mmain_img = main_img.replace("&#39;","");
+        if(use_fee != null) muse_fee = use_fee.replace("&#39;","");
+        if(inquiry != null)  minquiry = inquiry.replace("&#39;","");
+        if(contents != null)  mcontents = contents.replace("&#39;","");
+        if(cultcode != null)  mcultcode = cultcode.replace("&#39", "");
 
         x=0;
         y=0;

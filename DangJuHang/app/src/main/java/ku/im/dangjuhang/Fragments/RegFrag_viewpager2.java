@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import ku.im.dangjuhang.Client;
 import ku.im.dangjuhang.Hangsa;
 import ku.im.dangjuhang.R;
 
@@ -49,7 +50,15 @@ public class RegFrag_viewpager2 extends Fragment{
             public void onClick(View v) {
                 Hangsa hangsa = new Hangsa(name,startdate,enddate,time,address,null,
                         null,null,null,explane.getText().toString(),null);
-                //new Client().ResigterHangsa(hangsa);
+                boolean result = new Client().RegisterEvent(hangsa);
+                if(result == true)
+                {
+                    // 성공했습니다 토스트
+                }
+                else
+                {
+                    // 실패했습니다 토스트
+                }
             }
         });
 
