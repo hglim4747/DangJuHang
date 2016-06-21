@@ -86,8 +86,24 @@ public class Client {
 
     public boolean CancelEvent( String hangsaID )
     {
-        //나중으로 미룬닷 힣
-        return true;
+        if(userdata == null) return false;
+        JSONObject params = new JSONObject();
+        try {
+            params.accumulate("cultcode", hangsaID);
+            params.accumulate("userid", userdata.get("id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        boolean result = false;
+        String t = request("cancel_event", params);
+        try {
+            JSONObject jsonObject = new JSONObject(t);
+            result = jsonObject.getBoolean("result");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public boolean LikeEvent( String hangsaID )
@@ -114,6 +130,28 @@ public class Client {
 
     }
 
+    public boolean CancelLike ( String hangsaID )
+    {
+        if(userdata == null) return false;
+        JSONObject params = new JSONObject();
+        try {
+            params.accumulate("cultcode", hangsaID);
+            params.accumulate("userid", userdata.get("id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        boolean result = false;
+        String t = request("cancel_like", params);
+        try {
+            JSONObject jsonObject = new JSONObject(t);
+            result = jsonObject.getBoolean("result");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public boolean GetLike( String hangsaID ){
         if(userdata == null) return false;
         JSONObject params = new JSONObject();
@@ -135,12 +173,6 @@ public class Client {
         return result;
     } // 이미 내가 행사를 좋아했으면 true, 아니면 false
 
-    public boolean CancelLike( String hangsaID )
-    {
-        //행사정보와 내 아이디로만 취소하는 함수입니다
-
-        return true;
-    }
 
     public JSONObject GetLikeNum( String hangsaID )
     {

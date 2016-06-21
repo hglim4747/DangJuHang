@@ -18,28 +18,40 @@ import java.util.ArrayList;
 import ku.im.dangjuhang.Client;
 import ku.im.dangjuhang.DownloadImageTask;
 import ku.im.dangjuhang.Hangsa;
+import ku.im.dangjuhang.MainActivity;
 import ku.im.dangjuhang.R;
 import ku.im.dangjuhang.SeoulXMLParser;
 
 public class ArticleFragment extends Fragment {
     final static String ARG_POSITION = "position";
-    int mCurrentPosition = -1;
+    int mCurrentPosition;
     String Url;
-    Hangsa hangsa;
+    public Hangsa hangsa;
     ArrayList<Hangsa> arrayList;
     ToggleButton toggleButton;
     TextView howmany;
+    int position = 0;
+
     //public static SeoulXMLParser mXMLParser;
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(ARG_POSITION, mCurrentPosition);
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        MainActivity.selectedX = 0;
+        MainActivity.selectedY = 0;
+    }
+
     public static ArticleFragment newInstance(int position){
         ArticleFragment articleFragment = new ArticleFragment();
         Bundle args = new Bundle();
         args.putInt(ArticleFragment.ARG_POSITION, position);
         articleFragment.setArguments(args);
+        articleFragment.position = position;
         return articleFragment;
     }
     @Nullable
@@ -58,6 +70,12 @@ public class ArticleFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        if(position >=0 && position < SeoulXMLParser.getArray().size()) {
+            hangsa = SeoulXMLParser.getArray().get(position);
+            MainActivity.selectedX = hangsa.x;
+            MainActivity.selectedY = hangsa.y;
+        }
         Bundle args = getArguments();
         if (args != null) {
             updateArticleView(args.getInt(ARG_POSITION));
@@ -92,7 +110,7 @@ public class ArticleFragment extends Fragment {
                 howmany.setText("0명이 가고팡!");
             }
 
-            Toast.makeText(getActivity(), SeoulXMLParser.getArray().get(position).getMcultcode(),Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), SeoulXMLParser.getArray().get(position).getMcultcode(),Toast.LENGTH_SHORT).show();
             toggleButton = (ToggleButton)getActivity().findViewById(R.id.wanna);
             toggleButton.setOnClickListener(new View.OnClickListener() {
                 @Override
