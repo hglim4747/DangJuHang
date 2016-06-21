@@ -2,6 +2,7 @@ package ku.im.dangjuhang.Fragments;
 
 import android.app.Activity;
 import android.app.ListFragment;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -87,7 +88,10 @@ public class HeadlinesFragment extends ListFragment {
     @Override
     public void onStart() {
         super.onStart();
-        listView = getListView(); // listvew 객체를 얻음1
+        getListView().setDivider(new ColorDrawable(0x99fff5b5));// listvew 객체를 얻음1
+        listView = getListView();
+        //listView.setDivider(new ColorDrawable(getActivity().getResources().getColor(R.color.list,)));
+        listView.setDividerHeight(50);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
     }
 }
