@@ -3,7 +3,10 @@ package ku.im.dangjuhang;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -29,6 +32,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Fragment fragment;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+    LocationManager locationManager;
+    Location location;
+    public static double la = 0;
+    public static double ln = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +100,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        ln = location.getLongitude();
+        la = location.getLatitude();
+        //Toast.makeText(this,String.valueOf(ln) + " - " + String.valueOf(la),Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -233,4 +245,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(getApplicationContext(),String.valueOf(image),Toast.LENGTH_SHORT).show();
         }
     }
+    public double la(){return la;}
+    public double ln(){return ln;}
 }

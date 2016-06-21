@@ -14,12 +14,12 @@
         android:textSize="14pt"
         android:top="10dp"
         android:textAlignment="center"
-        android:text="여기에 정보 띄우쟝"/>
+        android:text="여기에 정보 띄우쟝"
+        android:layout_marginBottom="10dp"/>
         <ImageView
             android:id="@+id/fragment_img"
             android:layout_width="280dp"
             android:layout_height="200dp"
-            android:top="10dp"
             android:layout_gravity="center"
             android:src="@drawable/user"/>
 
