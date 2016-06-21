@@ -106,6 +106,7 @@ public class ArticleFragment extends Fragment {
                 howmany.setText(num+"명이 가고팡!");
             }
             catch (Exception e){
+
                 howmany.setText("0명이 가고팡!");
             }
 

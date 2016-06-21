@@ -38,11 +38,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Location location;
     public static double la = 0;
     public static double ln = 0;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        startActivity(new Intent(this, SplashActivity.class));
         init(savedInstanceState);
         boolean login = new Client().NaverLogin(this);
         if(login)
