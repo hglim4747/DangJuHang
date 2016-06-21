@@ -1,20 +1,15 @@
 package ku.im.dangjuhang.Fragments;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -69,10 +64,15 @@ public class MyFrag extends Fragment{
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    alertDialog.show();
+                    alertDelete(hangsaList.get(position).getMcultcode());
                 }
             });
         }
+
+
+    }
+
+    void alertDelete(final String id){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("삭제");
@@ -83,6 +83,10 @@ public class MyFrag extends Fragment{
         builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                new Client().CancelEvent(id);
+                hangsaList = new Client().GetMyEvent();
+                myRegAdapter = new MyRegAdapter(getActivity(),android.R.layout.simple_list_item_1,hangsaList);
+                listView.setAdapter(myRegAdapter);
                 // 삭제하는 부분
             }
         });
@@ -93,11 +97,7 @@ public class MyFrag extends Fragment{
             }
         });
         alertDialog = builder.create();
+        alertDialog.show();
     }
-
-    void deleteMyHangsa(){
-
-    }
-
 
 }

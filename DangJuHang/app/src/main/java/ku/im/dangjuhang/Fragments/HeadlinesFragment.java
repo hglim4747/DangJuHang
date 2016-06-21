@@ -58,7 +58,7 @@ public class HeadlinesFragment extends ListFragment {
             String serviceType = "xml/"; // 필수
             String service ="SearchConcertDetailService/"; //필수
             String start_index = "1/"; //필수
-            String end_index = "3"; //필수
+            String end_index = "10"; //필수
 
             try {
                 Url = serviceUrl+serviceKey+serviceType+service+start_index+end_index;
