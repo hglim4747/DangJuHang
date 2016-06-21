@@ -38,7 +38,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(this, Client.userdata.get("name") + "님 환영합니다.\n연령 : " + Client.userdata.get("age")+"0대", Toast.LENGTH_LONG).show();
         }
 
-        new Client().GetAllEvent();
+//        Hangsa hangsa = new Hangsa("Title","시작날","종료날","Time","건국대학교 새천년관",null,null,null,null,"설명",null);
+//        boolean result = new Client().RegisterEvent(hangsa);
+//        new Client().GetLikeNum("100");
+//        new Client().GetLike(String.valueOf(77107));
+//        new Client().GetAllEvent();
+//        new Client().GetMyEvent();
+//        new Client().SearchPlace("서울특별시 하월곡동 88-64", null, null);
+
     }
 
     void init(Bundle savedInstanceState){

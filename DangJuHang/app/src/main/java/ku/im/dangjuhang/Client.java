@@ -49,7 +49,7 @@ public class Client {
         JSONObject params = new JSONObject();
         try {
             params.accumulate("userid", userdata.get("id"));
-            params.accumulate("title", h.getMtime());
+            params.accumulate("title", h.getMtitle());
             params.accumulate("start_date", h.getMstart_date());
             params.accumulate("end_date", h.getMend_date());
             params.accumulate("time", h.getMtime());
@@ -432,6 +432,19 @@ public class Client {
         try {
             page = new RequestPlace().execute(search).get();
             XMLParsing(page, getSearchData);
+            String tpage = new RequestCoord().execute(search).get();
+            if(tpage != null)
+            {
+                getCoordData.clear();
+                XMLParsing(tpage, getCoordData);
+                if(getCoordData.get("x") != null)
+                {
+                    if(lat != null) lat[0] = Double.parseDouble(getCoordData.get("x"));
+                    if(longi != null) longi[0] = Double.parseDouble(getCoordData.get("y"));
+                    return true;
+                }
+            }
+
             if(getSearchData.size() <= 0) return false;
             if(getSearchData.get("address") == null) return false;
             page = new RequestCoord().execute(getSearchData.get("address")).get();
@@ -443,8 +456,8 @@ public class Client {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        lat[0] = Double.parseDouble(getCoordData.get("x"));
-        longi[0] = Double.parseDouble(getCoordData.get("y"));
+        if(lat != null) lat[0] = Double.parseDouble(getCoordData.get("x"));
+        if(longi != null) longi[0] = Double.parseDouble(getCoordData.get("y"));
         return true;
     }
 
