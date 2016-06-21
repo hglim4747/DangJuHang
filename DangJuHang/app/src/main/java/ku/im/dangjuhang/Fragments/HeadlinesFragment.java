@@ -10,7 +10,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import ku.im.dangjuhang.Client;
 import ku.im.dangjuhang.Hangsa;
 import ku.im.dangjuhang.HangsaAdapter;
 import ku.im.dangjuhang.SeoulXMLParser;

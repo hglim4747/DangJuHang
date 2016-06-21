@@ -27,6 +27,7 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
@@ -101,9 +102,6 @@ public class Client {
         }
         return result;
 
-        //행사정보와 내 연령대를 LIKE 디비에 보내줄거얀 아이디는 알아서 가겠다는 마음 ===> 알아서 감 ! 게다가 연령도 알아서 가게 만듬 !
-        //나중에 좋아요 한것을 여기서 확인해서
-        //다시 토글버튼에 set 해주는 것도 영향미쳐야됨  ===> 좋아요한거 확인하는 함수 따로 만들게 !
     }
 
     public boolean GetLike( String hangsaID ){
@@ -130,7 +128,7 @@ public class Client {
     public boolean CancelLike( String hangsaID )
     {
         //행사정보와 내 아이디로만 취소하는 함수입니다
-        //다시 토글버튼에 set 해주는 것도 영향미쳐야됨
+
         return true;
     }
 
