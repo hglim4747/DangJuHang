@@ -41,7 +41,7 @@ public class RegFrag_viewpager2 extends Fragment{
     Button regbtn, canclebtn,selectBtn;
     EditText telEdit, explaneEdit;
     public ImageView imageView;
-    public String timestamp;
+
 
     private static final int RESULT_SELECT_IMAGE = 1;
     RegFrag_viewpager1 page1;
@@ -97,15 +97,14 @@ public class RegFrag_viewpager2 extends Fragment{
                 Hangsa hangsa = new Hangsa(name2,startdate2,enddate2,time,address2,null,
                         null,null,null,explane,null);
 
-                boolean result = new Client().RegisterEvent(hangsa);
+                String result = new Client().RegisterEvent(hangsa);
 
-
-                if(result == true)
+                if(result != null)
                 {
                     //Client 코드 받아와서 이미지 이름으로 넣기
                     Bitmap image = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                     //execute the async task and upload the image to server
-                    new Upload(image,"IMG_"+timestamp).execute();
+                    new Upload(image,result).execute();
 
                     Toast.makeText(getActivity(),"등록성공ㅎㅎ",Toast.LENGTH_SHORT).show();
                     // 성공했습니다 토스트
@@ -183,7 +182,7 @@ public class RegFrag_viewpager2 extends Fragment{
                 //convert this HashMap to encodedUrl to send to php file
                 String dataToSend = hashMapToUrl(detail);
                 //make a Http request and send data to saveImage.php file
-                String response = Request.post("http://172.16.49.176/djh/index.php", dataToSend);
+                String response = Request.post("http://172.16.49.176/djh/login.php", dataToSend);
 
                 //return the response
                 return response;
