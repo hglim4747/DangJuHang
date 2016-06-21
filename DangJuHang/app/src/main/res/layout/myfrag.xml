@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     tools:context="ku.im.dangjuhang.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/my_content_fragment"
+    <ListView
+        android:id="@+id/myfrag_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </FrameLayout>
+        android:layout_height="match_parent"></ListView>
 </LinearLayout>

@@ -22,12 +22,36 @@
             android:textSize="14pt"
             android:textAlignment="center"
             android:text="여기에 정보 띄우쟝"/>
-    <ToggleButton
-        android:id="@+id/toggle"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/fragment_where"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textOff="가볼가"
-        android:textOn="가볼가"/>
+        android:textSize="10pt"
+        android:textAlignment="center"
+        android:text="여기에 장소 띄우쟝"/>
+    <TextView
+        android:id="@+id/fragment_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10pt"
+        android:textAlignment="center"
+        android:text="여기에 날짜 띄우쟝"/>
+    <TextView
+        android:autoLink="web"
+        android:id="@+id/fragment_who"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="8pt"
+        android:textAlignment="center"
+        android:text="주관업체번호링크"/>
+    <ToggleButton
+        android:id="@+id/wanna"
+        android:layout_gravity="center"
+        android:background="@drawable/toggle_bg"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:textOn=""
+        android:textOff=""
+        />
 
 </LinearLayout>
