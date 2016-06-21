@@ -198,9 +198,9 @@ public class MapActivity extends NMapActivity implements NMapPOIdataOverlay.OnSt
 
     @Override
     public void onCalloutClick(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {
-        int position = nMapPOIitem.getId();
-        Intent intent = new Intent(MapActivity.this, MainActivity.class);
-        intent.putExtra("position", position);
-        startActivity(intent);
+//        int position = nMapPOIitem.getId();
+//        Intent intent = new Intent(MapActivity.this, MainActivity.class);
+//        intent.putExtra("position", position);
+//        startActivity(intent);
     }
 }
