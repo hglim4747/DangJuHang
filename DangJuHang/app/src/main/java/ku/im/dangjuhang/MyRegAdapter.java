@@ -1,6 +1,20 @@
 package ku.im.dangjuhang;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.NinePatch;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.NinePatchDrawable;
+import android.graphics.drawable.shapes.RoundRectShape;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +50,14 @@ public class MyRegAdapter extends ArrayAdapter {
         final Hangsa p = items.get(position);
         ImageView image = (ImageView)v.findViewById(R.id.myfrag_listview_row_img);
         TextView text = (TextView)v.findViewById(R.id.myfrag_listview_row_text);
+        ImageView imagedelete = (ImageView)v.findViewById(R.id.myfrag_listview_row_imgdelete);
+
 
         text.setText(p.getMtitle());
+        new DownloadImageTask(image).execute(p.getMmain_img());
+
 
         return v;
     }
+
 }
