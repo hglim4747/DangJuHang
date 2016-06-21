@@ -38,7 +38,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="내 위치로부터 몇km"
         android:textColor="#ffbd94"
         android:layout_marginBottom="20dp"/>
 

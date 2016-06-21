@@ -3,7 +3,10 @@ package ku.im.dangjuhang;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -29,6 +32,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Fragment fragment;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+    Hangsa hangsa = null;
+    public static double selectedX = 0, selectedY = 0;
+    LocationManager locationManager;
+    Location location;
+    public static double la = 0;
+    public static double ln = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         int extrapos = getIntent().getIntExtra("position", -1);
-        if( extrapos > 0 )
+        if( extrapos >= 0 )
         {
             onArticleSelected(extrapos);
         }
@@ -76,10 +86,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
+
+                if(MainActivity.selectedX > 0 && MainActivity.selectedX > 0)
+                {
+                    intent.putExtra("x",MainActivity.selectedX);
+                    intent.putExtra("y",MainActivity.selectedY);
+                }
+
                 startActivity(intent);
 
             }
@@ -94,6 +112,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        ln = location.getLongitude();
+        la = location.getLatitude();
+        //Toast.makeText(this,String.valueOf(ln) + " - " + String.valueOf(la),Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -231,7 +254,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                Long tsLong = System.currentTimeMillis() / 1000;
 //                timestamp = tsLong.toString();
             }
-            Toast.makeText(getApplicationContext(),String.valueOf(image),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),String.valueOf(image),Toast.LENGTH_SHORT).show();
         }
     }
+    public double la(){return la;}
+    public double ln(){return ln;}
 }

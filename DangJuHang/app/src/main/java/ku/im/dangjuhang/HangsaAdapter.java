@@ -44,7 +44,16 @@ public class HangsaAdapter extends ArrayAdapter<Hangsa> {
         bt.setText(p.getMtitle());
         where.setText(p.getMplace());
         when.setText(p.getMstart_date() + " ~ " + p.getMend_date());
-        district.setText("내 위치로부터 몇 " + "km"); // 여기에 거리 정보 넣어야돼애ㅐㅐ
+
+        double xa = MainActivity.la;
+        double xn = MainActivity.ln;
+
+        double dx = (p.x - xn) * 92;
+        double dy = (p.y - xa) * 114;
+
+        double dis = Math.sqrt(dx * dx + dy * dy);
+        String out = String.format("%.2f",dis);
+        district.setText("내 위치로부터 " + out + "km"); // 여기에 거리 정보 넣어야돼애ㅐㅐ
 
         new DownloadImageTask(ii).execute(p.getMmain_img());
 
