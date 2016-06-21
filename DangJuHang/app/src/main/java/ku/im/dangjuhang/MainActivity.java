@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -39,13 +40,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(this, Client.userdata.get("name") + "님 환영합니다.\n연령 : " + Client.userdata.get("age")+"0대", Toast.LENGTH_LONG).show();
         }
 
+        int extrapos = getIntent().getIntExtra("position", -1);
+        if( extrapos > 0 )
+        {
+            onArticleSelected(extrapos);
+        }
+
 //        Hangsa hangsa = new Hangsa("Title","시작날","종료날","Time","건국대학교 새천년관",null,null,null,null,"설명",null);
 //        boolean result = new Client().RegisterEvent(hangsa);
 //        new Client().GetLikeNum("100");
 //        new Client().GetLike(String.valueOf(77107));
 //        new Client().GetAllEvent();
 //        new Client().GetMyEvent();
-        new Client().SearchPlace("ㅅ", null, null);
+//        new Client().SearchPlace("ㅅ", null, null);
 
     }
 
@@ -171,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentManager = getFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             RegFrag regFrag = new RegFrag();
-            fragmentTransaction.replace(R.id.container_fragment, regFrag);
+            fragmentTransaction.replace(R.id.container_fragment, regFrag, "reg");
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
             //등록페이지
@@ -208,5 +215,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
         }
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null){
+            //set the selected image to image variable
+            Uri image = data.getData();
+            RegFrag reg = (RegFrag) getFragmentManager().findFragmentByTag("reg");
+            if(reg != null) {
+                reg.page2.imageView.setImageURI(image);
+
+                //get the current timeStamp and strore that in the time Variable
+//                Long tsLong = System.currentTimeMillis() / 1000;
+//                timestamp = tsLong.toString();
+            }
+            Toast.makeText(getApplicationContext(),String.valueOf(image),Toast.LENGTH_SHORT).show();
+        }
+    }
 }

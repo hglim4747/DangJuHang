@@ -184,11 +184,8 @@ public class MapActivity extends NMapActivity implements NMapPOIdataOverlay.OnSt
 
             if (mMapView.isAutoRotateEnabled()) {
                 mMyLocationOverlay.setCompassHeadingVisible(false);
-
                 mMapCompassManager.disableCompass();
-
                 mMapView.setAutoRotateEnabled(false, false);
-
                // mMapContainerView.requestLayout();
             }
         }
@@ -201,7 +198,9 @@ public class MapActivity extends NMapActivity implements NMapPOIdataOverlay.OnSt
 
     @Override
     public void onCalloutClick(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {
-        int position = nMapPOIitem.getId();
-
+//        int position = nMapPOIitem.getId();
+//        Intent intent = new Intent(MapActivity.this, MainActivity.class);
+//        intent.putExtra("position", position);
+//        startActivity(intent);
     }
 }
