@@ -85,7 +85,7 @@ public class RegFrag_viewpager2 extends Fragment{
             public void onClick(View v) {
                 explaneEdit.setText("");
                 telEdit.setText("");
-                RegFrag_viewpager1  regfrag1 = new RegFrag_viewpager1();
+                RegFrag_viewpager1  regfrag1 = page1;
                 regfrag1.name.setText("");
                 regfrag1.address.setText("");
                 regfrag1.startdateEdit.setText("");

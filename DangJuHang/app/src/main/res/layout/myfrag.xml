@@ -9,9 +9,9 @@
     <TextView
         android:id="@+id/myfrag_NoHangsatext"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:gravity="center" />
+        android:layout_gravity="center" />
     <ListView
         android:id="@+id/myfrag_listview"
         android:layout_width="match_parent"
