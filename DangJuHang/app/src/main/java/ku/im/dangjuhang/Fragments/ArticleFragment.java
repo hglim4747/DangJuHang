@@ -18,23 +18,40 @@ import java.util.ArrayList;
 import ku.im.dangjuhang.Client;
 import ku.im.dangjuhang.DownloadImageTask;
 import ku.im.dangjuhang.Hangsa;
+import ku.im.dangjuhang.MainActivity;
 import ku.im.dangjuhang.R;
 import ku.im.dangjuhang.SeoulXMLParser;
 
 public class ArticleFragment extends Fragment {
     final static String ARG_POSITION = "position";
-    int mCurrentPosition = -1;
+    int mCurrentPosition;
     String Url;
     public Hangsa hangsa;
     ArrayList<Hangsa> arrayList;
     ToggleButton toggleButton;
     TextView howmany;
+
     //public static SeoulXMLParser mXMLParser;
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(ARG_POSITION, mCurrentPosition);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MainActivity.selectedX = hangsa.x;
+        MainActivity.selectedY = hangsa.y;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MainActivity.selectedX = 0;
+        MainActivity.selectedY = 0;
+    }
+
     public static ArticleFragment newInstance(int position){
         ArticleFragment articleFragment = new ArticleFragment();
         Bundle args = new Bundle();

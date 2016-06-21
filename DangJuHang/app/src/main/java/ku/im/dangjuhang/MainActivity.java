@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Fragment fragment;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+    Hangsa hangsa = null;
+
+    public static double selectedX = 0, selectedY = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,15 +85,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
 
-                Fragment fragment = fragmentManager.findFragmentByTag("article");
-                if(fragment != null && fragment instanceof ArticleFragment)
+                if(selectedX > 0 && selectedX > 0)
                 {
-                    Hangsa hangsa = ((ArticleFragment)fragment).hangsa;
-                    hangsa.updatePlace();
-                    double x = hangsa.x;
-                    double y = hangsa.y;
-                    intent.putExtra("x",x);
-                    intent.putExtra("y",x);
+                    intent.putExtra("x",selectedX);
+                    intent.putExtra("y",selectedY);
                 }
 
                 startActivity(intent);
