@@ -46,7 +46,7 @@ public class Client {
     DefaultHttpClient httpClient = new DefaultHttpClient();
     public static HashMap<String, String> userdata= null;
 
-    static final String URL = "http://192.168.0.9/djh/index.php";
+    static final String URL = "http://172.16.49.176/djh/index.php";
 
     public boolean RegisterEvent( Hangsa h )
     {
@@ -111,7 +111,26 @@ public class Client {
         //다시 토글버튼에 set 해주는 것도 영향미쳐야됨  ===> 좋아요한거 확인하는 함수 따로 만들게 !
     }
 
-    public boolean GetLike( String hangsaID ){ return false; } // 이미 내가 행사를 좋아했으면 true, 아니면 false
+    public boolean GetLike( String hangsaID ){
+        if(userdata == null) return false;
+        JSONObject params = new JSONObject();
+        try {
+            params.accumulate("cultcode", hangsaID);
+            params.accumulate("userid", userdata.get("id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        boolean result = false;
+        String t = request("get_like", params);
+        try {
+            JSONObject jsonObject = new JSONObject(t);
+            result = jsonObject.getBoolean("result");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    } // 이미 내가 행사를 좋아했으면 true, 아니면 false
 
     public boolean CancelLike( String hangsaID )
     {
