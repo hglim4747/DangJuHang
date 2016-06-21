@@ -111,9 +111,7 @@ public class MapActivity extends NMapActivity implements NMapPOIdataOverlay.OnSt
         mMapLocationManager.setOnLocationChangeListener(new NMapLocationManager.OnLocationChangeListener() {
             @Override
             public boolean onLocationChanged(NMapLocationManager nMapLocationManager, NGeoPoint nGeoPoint) {
-                if (mMapController != null) {
-                    mMapController.animateTo(nGeoPoint);
-                }
+
                 return true;
             }
 
@@ -133,6 +131,16 @@ public class MapActivity extends NMapActivity implements NMapPOIdataOverlay.OnSt
         mMapLocationManager.enableMyLocation(true);
 
         startMyLocation();
+
+        double x = getIntent().getDoubleExtra("x", 0);
+        double y = getIntent().getDoubleExtra("y", 0);
+        if(x>0 && y>0)
+        {
+            NGeoPoint point = new NGeoPoint(x,y);
+            if (mMapController != null) {
+                mMapController.animateTo(point);
+            }
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -198,9 +206,10 @@ public class MapActivity extends NMapActivity implements NMapPOIdataOverlay.OnSt
 
     @Override
     public void onCalloutClick(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {
-//        int position = nMapPOIitem.getId();
-//        Intent intent = new Intent(MapActivity.this, MainActivity.class);
-//        intent.putExtra("position", position);
-//        startActivity(intent);
+        int position = nMapPOIitem.getId();
+        Intent intent = new Intent(MapActivity.this, MainActivity.class);
+        intent.putExtra("position", position);
+        startActivity(intent);
+        finish();
     }
 }

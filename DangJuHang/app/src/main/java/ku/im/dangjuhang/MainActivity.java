@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         int extrapos = getIntent().getIntExtra("position", -1);
-        if( extrapos > 0 )
+        if( extrapos >= 0 )
         {
             onArticleSelected(extrapos);
         }
@@ -75,10 +75,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
+
+                Fragment fragment = fragmentManager.findFragmentByTag("article");
+                if(fragment != null && fragment instanceof ArticleFragment)
+                {
+                    Hangsa hangsa = ((ArticleFragment)fragment).hangsa;
+                    hangsa.updatePlace();
+                    double x = hangsa.x;
+                    double y = hangsa.y;
+                    intent.putExtra("x",x);
+                    intent.putExtra("y",x);
+                }
+
                 startActivity(intent);
 
             }
@@ -230,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                Long tsLong = System.currentTimeMillis() / 1000;
 //                timestamp = tsLong.toString();
             }
-            Toast.makeText(getApplicationContext(),String.valueOf(image),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),String.valueOf(image),Toast.LENGTH_SHORT).show();
         }
     }
 }

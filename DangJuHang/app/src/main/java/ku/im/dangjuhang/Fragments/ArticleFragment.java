@@ -23,7 +23,7 @@ public class ArticleFragment extends Fragment {
     final static String ARG_POSITION = "position";
     int mCurrentPosition = -1;
     String Url;
-    Hangsa hangsa;
+    public Hangsa hangsa;
     ArrayList<Hangsa> arrayList;
     ToggleButton toggleButton;
     //public static SeoulXMLParser mXMLParser;
