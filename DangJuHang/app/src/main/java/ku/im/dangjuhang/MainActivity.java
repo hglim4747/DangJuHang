@@ -43,12 +43,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startActivity(new Intent(this, SplashActivity.class));
         init(savedInstanceState);
         boolean login = new Client().NaverLogin(this);
         if(login)
         {
             Toast.makeText(this, Client.userdata.get("name") + "님 환영합니다.\n연령 : " + Client.userdata.get("age")+"0대", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            finish();
         }
 
         int extrapos = getIntent().getIntExtra("position", -1);
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        new Client().GetAllEvent();
 //        new Client().GetMyEvent();
 //        new Client().SearchPlace("ㅅ", null, null);
-
+        new Client().GetAllLikeEvent();
     }
 
     void init(Bundle savedInstanceState){

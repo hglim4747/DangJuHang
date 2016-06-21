@@ -239,6 +239,30 @@ public class Client {
         return list;
     }
 
+    public ArrayList<Hangsa> GetAllLikeEvent()
+    {
+        if(userdata == null) return null;
+        String userid = userdata.get("id");
+        JSONObject params = new JSONObject();
+        try {
+            params.put("userid", userid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        boolean result = false;
+        String t = request("get_all_like_event", params);
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(t);
+            result = jsonObject.getBoolean("result");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Hangsa> list = parseToHangsaList(jsonObject);
+        return list;
+    }
+
     public ArrayList<Hangsa> parseToHangsaList(JSONObject jsonObject)
     {
         ArrayList<Hangsa> list = new ArrayList<Hangsa>();
