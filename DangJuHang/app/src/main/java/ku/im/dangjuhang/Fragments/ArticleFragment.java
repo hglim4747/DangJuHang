@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import ku.im.dangjuhang.Client;
@@ -26,6 +28,7 @@ public class ArticleFragment extends Fragment {
     public Hangsa hangsa;
     ArrayList<Hangsa> arrayList;
     ToggleButton toggleButton;
+    TextView howmany;
     //public static SeoulXMLParser mXMLParser;
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -71,6 +74,7 @@ public class ArticleFragment extends Fragment {
             TextView fragment_where = (TextView) getActivity().findViewById(R.id.fragment_where);
             TextView fragment_date = (TextView)getActivity().findViewById(R.id.fragment_date);
             TextView fragment_who = (TextView)getActivity().findViewById(R.id.fragment_who);
+            howmany = (TextView)getActivity().findViewById(R.id.howmany);
 
             mCurrentPosition = position;
             new DownloadImageTask(articleimg).execute(SeoulXMLParser.getArray().get(position).getMmain_img());
@@ -78,6 +82,16 @@ public class ArticleFragment extends Fragment {
             fragment_where.setText(SeoulXMLParser.getArray().get(position).getMplace());
             fragment_date.setText(SeoulXMLParser.getArray().get(position).getMstart_date() + " ~ " + SeoulXMLParser.getArray().get(position).getMend_date());
             fragment_who.setText(SeoulXMLParser.getArray().get(position).getMorg_link());
+            howmany.setText("");
+            try {
+                JSONObject o = new Client().GetLikeNum(SeoulXMLParser.getArray().get(position).getMcultcode());
+                String num = o.getString("total");
+                howmany.setText(num+"명이 가고팡!");
+            }
+            catch (Exception e){
+                howmany.setText("0명이 가고팡!");
+            }
+
             Toast.makeText(getActivity(), SeoulXMLParser.getArray().get(position).getMcultcode(),Toast.LENGTH_SHORT).show();
             toggleButton = (ToggleButton)getActivity().findViewById(R.id.wanna);
             toggleButton.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +101,14 @@ public class ArticleFragment extends Fragment {
                         //좋아요 추가
                         new Client().LikeEvent(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode());
                         Toast.makeText(getActivity(), SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode().toString(), Toast.LENGTH_SHORT).show();
-
+                        try {
+                            JSONObject o = new Client().GetLikeNum(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode());
+                            String num = o.getString("total");
+                            howmany.setText(num+"명이 가고팡!");
+                        }
+                        catch (Exception e){
+                            howmany.setText("0명이 가고팡!");
+                        }
                     } else {
                         new Client().CancelLike(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode());
                         //좋아요 취소

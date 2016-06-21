@@ -13,6 +13,7 @@
     android:layout_height="100dp"
     android:src="@drawable/user"/>
     <TextView
+        android:textColor="#fcbbbb"
     android:id="@+id/row_text"
     android:gravity="center"
     android:layout_width="match_parent"
@@ -38,7 +39,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="내 위치로부터 몇km"
-        android:textColor="#fca246"
+        android:textColor="#ffbd94"
         android:layout_marginBottom="20dp"/>
 
 </LinearLayout>
