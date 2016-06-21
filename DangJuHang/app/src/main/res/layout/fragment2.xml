@@ -37,6 +37,7 @@
         android:textAlignment="center"
         android:text="여기에 날짜 띄우쟝"/>
     <TextView
+        android:autoLink="web"
         android:id="@+id/fragment_who"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

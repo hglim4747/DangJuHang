@@ -50,20 +50,7 @@ public class ArticleFragment extends Fragment {
                         }
                         hangsa = new Hangsa();
                         arrayList =  new ArrayList<Hangsa>();
-                        toggleButton = (ToggleButton)v.findViewById(R.id.wanna);
-                        toggleButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if (toggleButton.isChecked()) {
-                    //좋아요 추가
-                    new Client().LikeEvent(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode());
-                    Toast.makeText(getActivity(),SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode().toString(),Toast.LENGTH_SHORT).show();
-                } else {
-                    new Client().CancelLike(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode());
-                    //좋아요 취소
-                }
-            }
-        });
+
        // hangsa = arrayList.get(mCurrentPosition);
 
         return v;
@@ -88,6 +75,10 @@ public class ArticleFragment extends Fragment {
 
             ImageView articleimg = (ImageView) getActivity().findViewById(R.id.fragment_img);
             TextView articletext = (TextView) getActivity().findViewById(R.id.fragment_text);
+            TextView fragment_where = (TextView) getActivity().findViewById(R.id.fragment_where);
+            TextView fragment_date = (TextView)getActivity().findViewById(R.id.fragment_date);
+            TextView fragment_who = (TextView)getActivity().findViewById(R.id.fragment_who);
+
 
             //hangsa = mXMLParser.getHansa(position);
             //hangsa.getTitle() 등등 해주며 ㄴ되는건데...
@@ -96,8 +87,31 @@ public class ArticleFragment extends Fragment {
             mCurrentPosition = position;
             new DownloadImageTask(articleimg).execute(SeoulXMLParser.getArray().get(position).getMmain_img());
             articletext.setText(SeoulXMLParser.getArray().get(position).getMtitle());
+            fragment_where.setText(SeoulXMLParser.getArray().get(position).getMplace());
+            fragment_date.setText(SeoulXMLParser.getArray().get(position).getMstart_date() + " ~ " + SeoulXMLParser.getArray().get(position).getMend_date());
+            fragment_who.setText(SeoulXMLParser.getArray().get(position).getMorg_link());
             Toast.makeText(getActivity(), SeoulXMLParser.getArray().get(position).getMcultcode(),Toast.LENGTH_SHORT).show();
+            toggleButton = (ToggleButton)getActivity().findViewById(R.id.wanna);
+            toggleButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (toggleButton.isChecked()) {
+                        //좋아요 추가
+                        new Client().LikeEvent(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode());
+                        Toast.makeText(getActivity(), SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode().toString(), Toast.LENGTH_SHORT).show();
 
+                    } else {
+                        new Client().CancelLike(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode());
+                        //좋아요 취소
+                    }
+                }
+            });
+            if(new Client().GetLike(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode().toString())){
+                toggleButton.setChecked(true);
+            }
+            else{
+                toggleButton.setChecked(false);
+            }
             // Toast.makeText(getActivity(), Integer.toString(mCurrentPosition), Toast.LENGTH_SHORT).show();
 
 
