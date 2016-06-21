@@ -15,6 +15,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import ku.im.dangjuhang.Fragments.ArticleFragment;
 import ku.im.dangjuhang.Fragments.HeadlinesFragment;
@@ -31,8 +41,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init(savedInstanceState);
-        new Client().NaverLogin(this);
-        //new Client().SearchPlace("건국대학교", null, null);
+        boolean login = new Client().NaverLogin(this);
+        if(login)
+        {
+            Toast.makeText(this, Client.userdata.get("name") + "님 환영합니다.\n연령 : " + Client.userdata.get("age")+"0대", Toast.LENGTH_LONG).show();
+        }
+
+//        Hangsa hangsa = new Hangsa("제목","시작날","종료날","시간","서울특별시 성북구 하월곡동 88-63 101동 1301호",null,
+//                null,null,null,"설명",null);
+//        boolean result = new Client().RegisterEvent(hangsa);
+//        new Client().GetLikeNum("100");
+          new Client().GetLike(String.valueOf(77107));
+//        new Client().SearchPlace("건국대학교", null, null);
     }
 
     void init(Bundle savedInstanceState){
