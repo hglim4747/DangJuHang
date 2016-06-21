@@ -30,6 +30,7 @@ public class ArticleFragment extends Fragment {
     ArrayList<Hangsa> arrayList;
     ToggleButton toggleButton;
     TextView howmany;
+    int position = 0;
 
     //public static SeoulXMLParser mXMLParser;
     @Override
@@ -39,15 +40,8 @@ public class ArticleFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        MainActivity.selectedX = hangsa.x;
-        MainActivity.selectedY = hangsa.y;
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         MainActivity.selectedX = 0;
         MainActivity.selectedY = 0;
     }
@@ -57,6 +51,7 @@ public class ArticleFragment extends Fragment {
         Bundle args = new Bundle();
         args.putInt(ArticleFragment.ARG_POSITION, position);
         articleFragment.setArguments(args);
+        articleFragment.position = position;
         return articleFragment;
     }
     @Nullable
@@ -75,6 +70,12 @@ public class ArticleFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        if(position >=0 && position < SeoulXMLParser.getArray().size()) {
+            hangsa = SeoulXMLParser.getArray().get(position);
+            MainActivity.selectedX = hangsa.x;
+            MainActivity.selectedY = hangsa.y;
+        }
         Bundle args = getArguments();
         if (args != null) {
             updateArticleView(args.getInt(ARG_POSITION));
@@ -109,7 +110,7 @@ public class ArticleFragment extends Fragment {
                 howmany.setText("0명이 가고팡!");
             }
 
-            Toast.makeText(getActivity(), SeoulXMLParser.getArray().get(position).getMcultcode(),Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), SeoulXMLParser.getArray().get(position).getMcultcode(),Toast.LENGTH_SHORT).show();
             toggleButton = (ToggleButton)getActivity().findViewById(R.id.wanna);
             toggleButton.setOnClickListener(new View.OnClickListener() {
                 @Override

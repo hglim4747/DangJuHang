@@ -85,10 +85,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
 
-                if(selectedX > 0 && selectedX > 0)
+                if(MainActivity.selectedX > 0 && MainActivity.selectedX > 0)
                 {
-                    intent.putExtra("x",selectedX);
-                    intent.putExtra("y",selectedY);
+                    intent.putExtra("x",MainActivity.selectedX);
+                    intent.putExtra("y",MainActivity.selectedY);
                 }
 
                 startActivity(intent);

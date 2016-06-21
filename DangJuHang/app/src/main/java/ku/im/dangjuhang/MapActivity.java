@@ -97,7 +97,7 @@ public class MapActivity extends NMapActivity implements NMapPOIdataOverlay.OnSt
             double y = list.get(i).y;
             if(x > 0 && y > 0)
             {
-                poiData.addPOIitem(x, y, list.get(i).getMtitle(), markerId, i);
+                poiData.addPOIitem(x, y, list.get(i).getMtitle() + "("+ list.get(i).getMplace() + ")", markerId, i);
             }
         }
 
@@ -131,15 +131,19 @@ public class MapActivity extends NMapActivity implements NMapPOIdataOverlay.OnSt
         mMapLocationManager.enableMyLocation(true);
 
         startMyLocation();
-
         double x = getIntent().getDoubleExtra("x", 0);
         double y = getIntent().getDoubleExtra("y", 0);
         if(x>0 && y>0)
         {
+            mMapController.setZoomLevel(13);
             NGeoPoint point = new NGeoPoint(x,y);
             if (mMapController != null) {
                 mMapController.animateTo(point);
             }
+        }
+        else
+        {
+            mMapController.setZoomLevel(7);
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
