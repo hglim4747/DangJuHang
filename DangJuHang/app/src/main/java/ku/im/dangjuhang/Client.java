@@ -41,7 +41,8 @@ public class Client {
     DefaultHttpClient httpClient = new DefaultHttpClient();
     public static HashMap<String, String> userdata= null;
 
-    static final String URL = "http://172.16.49.176/djh/index.php";
+    public static String SERVER_IP = "172.16.49.176";
+    static final String URL = "http://"+SERVER_IP+"/djh/index.php";
 
     public String RegisterEvent( Hangsa h )
     {

@@ -42,7 +42,6 @@ public class RegFrag_viewpager2 extends Fragment{
     EditText telEdit, explaneEdit;
     public ImageView imageView;
 
-
     private static final int RESULT_SELECT_IMAGE = 1;
     RegFrag_viewpager1 page1;
     public RegFrag_viewpager2(){}
@@ -182,7 +181,7 @@ public class RegFrag_viewpager2 extends Fragment{
                 //convert this HashMap to encodedUrl to send to php file
                 String dataToSend = hashMapToUrl(detail);
                 //make a Http request and send data to saveImage.php file
-                String response = Request.post("http://172.16.49.176/djh/login.php", dataToSend);
+                String response = Request.post("http://" + Client.SERVER_IP + "/djh/login.php", dataToSend);
 
                 //return the response
                 return response;
