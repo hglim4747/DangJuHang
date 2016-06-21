@@ -36,7 +36,7 @@ public class SplashActivity extends Activity{
         ReStartAnimation(img, back);
 
 
-        handler.sendEmptyMessageDelayed(0, 5000);
+        handler.sendEmptyMessageDelayed(0, 3500);
 
 
     } //end onCreate Method
@@ -75,13 +75,7 @@ public class SplashActivity extends Activity{
                 }
                 setRightOutAnimatorSet.start();
                 setLeftInAnimatorSet.start();
-                setLeftInAnimatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        super.onAnimationEnd(animation);
-                        ReStartAnimation(img,back);
-                    }
-                });
+                 ReStartAnimation(img,back);
             }
         });
     }
