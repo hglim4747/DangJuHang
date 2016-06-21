@@ -75,7 +75,10 @@ public class HeadlinesFragment extends ListFragment {
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             arrayList = mXMLParser.getArray();
-
+            ArrayList<Hangsa> list = new Client().GetAllEvent();
+            arrayList.addAll(list);
+            for(int i=0; i<list.size(); i++)
+                list.get(i).updatePlace();
             adapter = new HangsaAdapter(getActivity(),android.R.layout.simple_list_item_1,arrayList);
             setListAdapter(adapter);
         }

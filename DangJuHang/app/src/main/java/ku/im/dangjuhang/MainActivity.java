@@ -39,13 +39,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(this, Client.userdata.get("name") + "님 환영합니다.\n연령 : " + Client.userdata.get("age")+"0대", Toast.LENGTH_LONG).show();
         }
 
-//        Hangsa hangsa = new Hangsa("제목","시작날","종료날","시간","서울특별시 성북구 하월곡동 88-63 101동 1301호",null,null,null,null,"설명",null);
+//        Hangsa hangsa = new Hangsa("Title","시작날","종료날","Time","건국대학교 새천년관",null,null,null,null,"설명",null);
 //        boolean result = new Client().RegisterEvent(hangsa);
 //        new Client().GetLikeNum("100");
 //        new Client().GetLike(String.valueOf(77107));
-        new Client().GetAllEvent();
+//        new Client().GetAllEvent();
 //        new Client().GetMyEvent();
-//        new Client().SearchPlace("건국대학교", null, null);
+//        new Client().SearchPlace("서울특별시 하월곡동 88-64", null, null);
+
     }
 
     void init(Bundle savedInstanceState){
@@ -70,18 +71,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //       .setAction("Action", null).show();
-//                MapFrag mapFrag = new MapFrag();
-//                fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.container_fragment, mapFrag);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-                //mapFrag.Set(getApplicationContext());
-
                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
                 startActivity(intent);
-                finish();
+
             }
         });
 
@@ -149,6 +141,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
         }
         else if (id == R.id.search) {
+            fragmentManager = getFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
 
         } // 검색
         else if (id == R.id.like) {

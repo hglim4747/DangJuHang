@@ -15,33 +15,27 @@
  */
 package ku.im.dangjuhang;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.widget.ImageView;
-import android.widget.ListView;
+import android.support.design.widget.FloatingActionButton;
+import android.view.View;
 import android.widget.Toast;
 
 import com.nhn.android.maps.NMapActivity;
 import com.nhn.android.maps.NMapCompassManager;
 import com.nhn.android.maps.NMapController;
 import com.nhn.android.maps.NMapLocationManager;
-import com.nhn.android.maps.NMapOverlayItem;
 import com.nhn.android.maps.NMapView;
 import com.nhn.android.maps.maplib.NGeoPoint;
 import com.nhn.android.maps.overlay.NMapPOIdata;
-import com.nhn.android.maps.overlay.NMapPOIitem;
 import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
-import com.nhn.android.mapviewer.overlay.NMapResourceProvider;
 
 import java.util.ArrayList;
 
 import ku.im.dangjuhang.Fragments.HeadlinesFragment;
 import ku.im.dangjuhang.Fragments.NMap.NMapPOIflagType;
-import ku.im.dangjuhang.Fragments.NMap.NMapViewer;
 import ku.im.dangjuhang.Fragments.NMap.NMapViewerResourceProvider;
 
 /**
@@ -137,6 +131,19 @@ public class MapActivity extends NMapActivity  {
         mMapLocationManager.enableMyLocation(true);
 
         startMyLocation();
+
+
+
+
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+
+            }
+        });
     }
 
     private void startMyLocation() {
