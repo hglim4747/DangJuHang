@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import ku.im.dangjuhang.Fragments.ArticleFragment;
 import ku.im.dangjuhang.Fragments.HeadlinesFragment;
+import ku.im.dangjuhang.Fragments.HeadlinesFragmentForRec;
+import ku.im.dangjuhang.Fragments.MyFrag;
 import ku.im.dangjuhang.Fragments.RegFrag;
 
 
@@ -132,6 +134,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         if (id == R.id.user) {
             //내가 등록한 행사들 나열
+            fragmentManager = getFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            MyFrag myFrag= new MyFrag();
+            fragmentTransaction.replace(R.id.container_fragment, myFrag);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         }
         else if (id == R.id.search) {
             fragmentManager = getFragmentManager();

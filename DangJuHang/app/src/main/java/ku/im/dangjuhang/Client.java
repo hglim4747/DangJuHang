@@ -151,8 +151,8 @@ public class Client {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return jsonObject;
-    }
+        return jsonObject; // 012345
+    } // 연령대 별 Like 수
 
     public ArrayList<Hangsa> GetAllEvent()
     {
