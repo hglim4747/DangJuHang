@@ -31,6 +31,8 @@ import ku.im.dangjuhang.ViewpagerAdapter;
 public class RegFrag extends Fragment {
 
     ViewPager pager;
+    RegFrag_viewpager1 page1;
+    RegFrag_viewpager2 page2;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,8 +46,8 @@ public class RegFrag extends Fragment {
 
         /////////////////////리시트 프레그먼트 연결, pager와 연결//////////////////////
         List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(new RegFrag_viewpager1());
-        fragmentList.add(new RegFrag_viewpager2());
+        fragmentList.add(page1 = new RegFrag_viewpager1());
+        fragmentList.add(page2 = new RegFrag_viewpager2(page1));
         ViewpagerAdapter adapter = new ViewpagerAdapter(getChildFragmentManager(), fragmentList);
         pager.setAdapter(adapter);
 
