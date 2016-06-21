@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        boolean result = new Client().RegisterEvent(hangsa);
 //        new Client().GetLikeNum("100");
 //        new Client().GetLike(String.valueOf(77107));
-        new Client().GetMyEvent();
+        new Client().GetAllEvent();
+//        new Client().GetMyEvent();
 //        new Client().SearchPlace("건국대학교", null, null);
     }
 
