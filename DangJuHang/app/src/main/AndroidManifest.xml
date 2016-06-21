@@ -24,9 +24,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.PICK" />
-
-                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -37,6 +36,11 @@
             android:label="OAuth2.0 In-app" />
         <activity android:name=".MapActivity"
             android:configChanges="keyboardHidden|orientation">
+
+        </activity>
+        <activity android:name=".SplashActivity"
+        android:configChanges="keyboardHidden|orientation"
+            android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
     </application>
