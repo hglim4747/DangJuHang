@@ -28,6 +28,7 @@ import com.nhn.android.maps.NMapLocationManager;
 import com.nhn.android.maps.NMapView;
 import com.nhn.android.maps.maplib.NGeoPoint;
 import com.nhn.android.maps.overlay.NMapPOIdata;
+import com.nhn.android.maps.overlay.NMapPOIitem;
 import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
@@ -43,7 +44,7 @@ import ku.im.dangjuhang.Fragments.NMap.NMapViewerResourceProvider;
  *
  * @author kyjkim
  */
-public class MapActivity extends NMapActivity  {
+public class MapActivity extends NMapActivity implements NMapPOIdataOverlay.OnStateChangeListener {
     private static final String LOG_TAG = "MapActivity";
     private static final boolean DEBUG = false;
 
@@ -96,12 +97,13 @@ public class MapActivity extends NMapActivity  {
             double y = list.get(i).y;
             if(x > 0 && y > 0)
             {
-                poiData.addPOIitem(x, y, list.get(i).getMtitle(), markerId, 0);
+                poiData.addPOIitem(x, y, list.get(i).getMtitle(), markerId, i);
             }
         }
 
         poiData.endPOIdata();
         poiDataOverlay = mOverlayManager.createPOIdataOverlay(poiData, null);
+        poiDataOverlay.setOnStateChangeListener(this);
         poiDataOverlay.showAllPOIdata(0);
 
         // location manager
@@ -131,10 +133,6 @@ public class MapActivity extends NMapActivity  {
         mMapLocationManager.enableMyLocation(true);
 
         startMyLocation();
-
-
-
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -194,5 +192,16 @@ public class MapActivity extends NMapActivity  {
                // mMapContainerView.requestLayout();
             }
         }
+    }
+
+    @Override
+    public void onFocusChanged(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {
+
+    }
+
+    @Override
+    public void onCalloutClick(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {
+        int position = nMapPOIitem.getId();
+
     }
 }
