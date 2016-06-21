@@ -19,11 +19,8 @@ import android.widget.Toast;
 
 import ku.im.dangjuhang.Fragments.ArticleFragment;
 import ku.im.dangjuhang.Fragments.HeadlinesFragment;
-<<<<<<< HEAD
 import ku.im.dangjuhang.Fragments.HeadlinesFragmentForRec;
-=======
 import ku.im.dangjuhang.Fragments.MyFrag;
->>>>>>> b60a3fc8dfca69f3b0e78d0817927e02cbd0ac42
 import ku.im.dangjuhang.Fragments.RegFrag;
 
 
@@ -164,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentManager = getFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
 
-            HeadlinesFragmentForRec firstFragment = new HeadlinesFragmentForRec();
+            HeadlinesFragment firstFragment = new HeadlinesFragment();
             firstFragment.setArguments(getIntent().getExtras());
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, firstFragment)
