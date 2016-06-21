@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import ku.im.dangjuhang.Fragments.ArticleFragment;
 import ku.im.dangjuhang.Fragments.HeadlinesFragment;
-import ku.im.dangjuhang.Fragments.HeadlinesFragmentForRec;
 import ku.im.dangjuhang.Fragments.MyFrag;
 import ku.im.dangjuhang.Fragments.RegFrag;
 
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        new Client().GetLike(String.valueOf(77107));
 //        new Client().GetAllEvent();
 //        new Client().GetMyEvent();
-//        new Client().SearchPlace("서울특별시 하월곡동 88-64", null, null);
+        new Client().SearchPlace("ㅅ", null, null);
 
     }
 

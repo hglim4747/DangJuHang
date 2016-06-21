@@ -43,9 +43,9 @@ public class Client {
 
     static final String URL = "http://172.16.49.176/djh/index.php";
 
-    public boolean RegisterEvent( Hangsa h )
+    public String RegisterEvent( Hangsa h )
     {
-        if(userdata == null) return false;
+        if(userdata == null) return null;
         JSONObject params = new JSONObject();
         try {
             params.accumulate("userid", userdata.get("id"));
@@ -65,13 +65,22 @@ public class Client {
 
         boolean result = false;
         String t = request("register_event", params);
+        JSONObject jsonObject = null;
         try {
-            JSONObject jsonObject = new JSONObject(t);
+            jsonObject = new JSONObject(t);
             result = jsonObject.getBoolean("result");
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return result;
+
+        if(jsonObject == null || result == false) return null;
+        String cultcode = null;
+        try {
+            cultcode = jsonObject.getString("cultcode");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return cultcode;
     }
 
     public boolean CancelEvent( String hangsaID )
