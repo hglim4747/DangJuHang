@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import org.json.JSONObject;
@@ -118,7 +117,7 @@ public class ArticleFragment extends Fragment {
                     if (toggleButton.isChecked()) {
                         //좋아요 추가
                         new Client().LikeEvent(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode());
-                        Toast.makeText(getActivity(), SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode().toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode().toString(), Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject o = new Client().GetLikeNum(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode());
                             String num = o.getString("total");
@@ -130,6 +129,15 @@ public class ArticleFragment extends Fragment {
                     } else {
                         new Client().CancelLike(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode());
                         //좋아요 취소
+                        try {
+                            JSONObject o = new Client().GetLikeNum(SeoulXMLParser.getArray().get(mCurrentPosition).getMcultcode());
+                            String num = o.getString("total");
+                            howmany.setText(num+"명이 가고팡!");
+
+                        }
+                        catch (Exception e){
+                            howmany.setText("0명이 가고팡!");
+                        }
                     }
                 }
             });
