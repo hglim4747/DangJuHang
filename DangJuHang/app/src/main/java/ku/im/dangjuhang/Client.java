@@ -2,21 +2,17 @@ package ku.im.dangjuhang;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +29,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -81,6 +76,7 @@ public class Client {
 
     public boolean CancelEvent( String hangsaID )
     {
+        //나중으로 미룬닷 힣
         return true;
     }
 
@@ -106,9 +102,6 @@ public class Client {
         }
         return result;
 
-        //행사정보와 내 연령대를 LIKE 디비에 보내줄거얀 아이디는 알아서 가겠다는 마음 ===> 알아서 감 ! 게다가 연령도 알아서 가게 만듬 !
-        //나중에 좋아요 한것을 여기서 확인해서
-        //다시 토글버튼에 set 해주는 것도 영향미쳐야됨  ===> 좋아요한거 확인하는 함수 따로 만들게 !
     }
 
     public boolean GetLike( String hangsaID ){
@@ -135,7 +128,7 @@ public class Client {
     public boolean CancelLike( String hangsaID )
     {
         //행사정보와 내 아이디로만 취소하는 함수입니다
-        //다시 토글버튼에 set 해주는 것도 영향미쳐야됨
+
         return true;
     }
 

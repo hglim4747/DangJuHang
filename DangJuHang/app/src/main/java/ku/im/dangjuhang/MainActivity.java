@@ -17,15 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import ku.im.dangjuhang.Fragments.ArticleFragment;
 import ku.im.dangjuhang.Fragments.HeadlinesFragment;
 import ku.im.dangjuhang.Fragments.RegFrag;
@@ -54,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        new Client().GetAllEvent();
 //        new Client().GetMyEvent();
 //        new Client().SearchPlace("서울특별시 하월곡동 88-64", null, null);
+
     }
 
     void init(Bundle savedInstanceState){
@@ -78,18 +70,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //       .setAction("Action", null).show();
-//                MapFrag mapFrag = new MapFrag();
-//                fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.container_fragment, mapFrag);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-                //mapFrag.Set(getApplicationContext());
-
                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
                 startActivity(intent);
-                finish();
+
             }
         });
 
@@ -151,6 +134,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //내가 등록한 행사들 나열
         }
         else if (id == R.id.search) {
+            fragmentManager = getFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
 
         } // 검색
         else if (id == R.id.like) {
@@ -176,6 +161,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //여기서는 어댑터를 바꿔줘야 한다잉
         }// 추천
         else if (id == R.id.reg) {
+            fragmentManager = getFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
             RegFrag regFrag = new RegFrag();
             fragmentTransaction.replace(R.id.container_fragment, regFrag);
             fragmentTransaction.addToBackStack(null);
@@ -214,4 +201,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
         }
     }
+
 }

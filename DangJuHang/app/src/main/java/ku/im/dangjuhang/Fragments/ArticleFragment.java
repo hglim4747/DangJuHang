@@ -20,39 +20,36 @@ import ku.im.dangjuhang.R;
 import ku.im.dangjuhang.SeoulXMLParser;
 
 public class ArticleFragment extends Fragment {
-                    final static String ARG_POSITION = "position";
-                    int mCurrentPosition = -1;
-                    String Url;
-                    Hangsa hangsa;
-                    ArrayList<Hangsa> arrayList;
-                    ToggleButton toggleButton;
-                    //public static SeoulXMLParser mXMLParser;
-
-                    @Override
-                    public void onSaveInstanceState(Bundle outState) {
-                        super.onSaveInstanceState(outState);
-                        outState.putInt(ARG_POSITION, mCurrentPosition);
-                    }
-                    public static ArticleFragment newInstance(int position){
-                        ArticleFragment articleFragment = new ArticleFragment();
-                        Bundle args = new Bundle();
-                        args.putInt(ArticleFragment.ARG_POSITION, position);
-                        articleFragment.setArguments(args);
-                        return articleFragment;
-                    }
-                    @Nullable
-                    @Override
-                    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-// return super.onCreateView(inflater, container, savedInstanceState);
-                        View v =inflater.inflate(R.layout.fragment2, container, false);
-                        if (savedInstanceState != null) {
-                            mCurrentPosition = savedInstanceState.getInt(ARG_POSITION);
-                        }
-                        hangsa = new Hangsa();
-                        arrayList =  new ArrayList<Hangsa>();
-
-       // hangsa = arrayList.get(mCurrentPosition);
-
+    final static String ARG_POSITION = "position";
+    int mCurrentPosition = -1;
+    String Url;
+    Hangsa hangsa;
+    ArrayList<Hangsa> arrayList;
+    ToggleButton toggleButton;
+    //public static SeoulXMLParser mXMLParser;
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(ARG_POSITION, mCurrentPosition);
+    }
+    public static ArticleFragment newInstance(int position){
+        ArticleFragment articleFragment = new ArticleFragment();
+        Bundle args = new Bundle();
+        args.putInt(ArticleFragment.ARG_POSITION, position);
+        articleFragment.setArguments(args);
+        return articleFragment;
+    }
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // return super.onCreateView(inflater, container, savedInstanceState);
+        View v =inflater.inflate(R.layout.fragment2, container, false);
+        if (savedInstanceState != null) {
+            mCurrentPosition = savedInstanceState.getInt(ARG_POSITION);
+        }
+        hangsa = new Hangsa();
+        arrayList =  new ArrayList<Hangsa>();
+        // hangsa = arrayList.get(mCurrentPosition);
         return v;
     }
     @Override
@@ -68,21 +65,12 @@ public class ArticleFragment extends Fragment {
     }
 
     public void updateArticleView(int position) {
-
         if(getActivity() != null) {
-            //여기서 position에 해당하는 정보를 가져와서
-            //arraylist.get[position]하면 되는데....
-
             ImageView articleimg = (ImageView) getActivity().findViewById(R.id.fragment_img);
             TextView articletext = (TextView) getActivity().findViewById(R.id.fragment_text);
             TextView fragment_where = (TextView) getActivity().findViewById(R.id.fragment_where);
             TextView fragment_date = (TextView)getActivity().findViewById(R.id.fragment_date);
             TextView fragment_who = (TextView)getActivity().findViewById(R.id.fragment_who);
-
-
-            //hangsa = mXMLParser.getHansa(position);
-            //hangsa.getTitle() 등등 해주며 ㄴ되는건데...
-            //readxml(position);
 
             mCurrentPosition = position;
             new DownloadImageTask(articleimg).execute(SeoulXMLParser.getArray().get(position).getMmain_img());
@@ -112,39 +100,6 @@ public class ArticleFragment extends Fragment {
             else{
                 toggleButton.setChecked(false);
             }
-            // Toast.makeText(getActivity(), Integer.toString(mCurrentPosition), Toast.LENGTH_SHORT).show();
-
-
-            //position 받아ㅓ 인텐트 넘겨받은거냐
         }
     }
-
-//    public void readxml(int pos) {
-//        try {
-//            String serviceUrl = "http://openAPI.seoul.go.kr:8088/";
-//            String serviceKey = "70515570556d697235305778726e58/"; // 필수
-//            String serviceType = "xml/"; // 필수
-//            String service ="SearchConcertDetailService/"; //필수
-//            String start_index = Integer.toString(pos) + "/"; //필수
-//            String end_index = Integer.toString(pos); //필수
-//
-//            try {
-//                Url = serviceUrl+serviceKey+serviceType+service+start_index+end_index;
-//                mXMLParser = new SeoulXMLParser(Url,handler);
-//                Thread thread = new Thread(mXMLParser);
-//                thread.start();
-//            }catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    Handler handler = new Handler() {
-//        public void handleMessage(Message msg) {
-//            arrayList = mXMLParser.getArray();
-//        }
-//    };
-
 }

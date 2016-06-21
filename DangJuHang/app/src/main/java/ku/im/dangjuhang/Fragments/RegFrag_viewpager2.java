@@ -35,21 +35,20 @@ public class RegFrag_viewpager2 extends Fragment{
         regbtn = (Button)root.findViewById(R.id.regfrag_insertbtn);
         canclebtn= (Button)root.findViewById(R.id.regfrag_cancelbtn);
 
-        RegFrag_viewpager1  regfrag1 = new RegFrag_viewpager1();
-        name= regfrag1.name.getText().toString();
-        address= regfrag1.address.getText().toString();
-        startdate= regfrag1.startdateEdit.getText().toString();
-        enddate= regfrag1.enddateEdit.getText().toString();
-        starttime= regfrag1.starttimeEdit.getText().toString();
-        endtime= regfrag1.endtimeEdit.getText().toString();
-        time= startdate+"~"+endtime;
-
-
         regbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RegFrag_viewpager1  regfrag1 = new RegFrag_viewpager1();
+                name= regfrag1.name.getText().toString();
+                address= regfrag1.address.getText().toString();
+                startdate= regfrag1.startdateEdit.getText().toString();
+                enddate= regfrag1.enddateEdit.getText().toString();
+                starttime= regfrag1.starttimeEdit.getText().toString();
+                endtime= regfrag1.endtimeEdit.getText().toString();
+                time= startdate+"~"+endtime;
                 Hangsa hangsa = new Hangsa(name,startdate,enddate,time,address,null,
                         null,null,null,explane.getText().toString(),null);
+
                 boolean result = new Client().RegisterEvent(hangsa);
                 if(result == true)
                 {
