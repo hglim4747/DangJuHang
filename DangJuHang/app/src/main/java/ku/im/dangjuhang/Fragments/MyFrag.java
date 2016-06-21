@@ -20,8 +20,6 @@ public class MyFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.myfrag,container,false);
-        text = (TextView)root.findViewById(R.id.test);
-        text.setText("My page");
         return root;
     }
 }

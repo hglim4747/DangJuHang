@@ -50,7 +50,7 @@ public class RegFrag_viewpager2 extends Fragment{
             public void onClick(View v) {
 
                 Hangsa hangsa = new Hangsa(name,startdate,enddate,time,address,null,
-                        null,null,null,explane.getText().toString());
+                        null,null,null,explane.getText().toString(), "default");
                 //new Client().ResigterHangsa(hangsa);
             }
         });
