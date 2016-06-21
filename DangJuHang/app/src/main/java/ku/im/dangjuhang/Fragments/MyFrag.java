@@ -51,7 +51,9 @@ public class MyFrag extends Fragment{
         hangsaList = new Client().GetMyEvent();
         if(hangsaList.size() <= 0){
             text = (TextView)v.findViewById(R.id.myfrag_NoHangsatext);
-            text.setText("내가 등록한 행사가\n없습니다");
+            text.setText("\n\n\n\n\n\n\n\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b" +
+                    "내가 등록한 행사가\b\b\b\b\b\b\n\b\b\b\b\b\b\b\b\b\b\b" +
+                    "\b\b\b\b\b\b\b\b\b\b\b\b없습니다");
         }else {
             listView = (ListView)v.findViewById(R.id.myfrag_listview);
 //            for (int i = 0; i < hangsaList.size(); i++) {
