@@ -17,17 +17,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import ku.im.dangjuhang.Fragments.ArticleFragment;
 import ku.im.dangjuhang.Fragments.HeadlinesFragment;
+import ku.im.dangjuhang.Fragments.MyFrag;
 import ku.im.dangjuhang.Fragments.RegFrag;
 
 
@@ -47,11 +39,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(this, Client.userdata.get("name") + "님 환영합니다.\n연령 : " + Client.userdata.get("age")+"0대", Toast.LENGTH_LONG).show();
         }
 
-//        Hangsa hangsa = new Hangsa("제목","시작날","종료날","시간","서울특별시 성북구 하월곡동 88-63 101동 1301호",null,
-//                null,null,null,"설명",null);
+//        Hangsa hangsa = new Hangsa("제목","시작날","종료날","시간","서울특별시 성북구 하월곡동 88-63 101동 1301호",null,null,null,null,"설명",null);
 //        boolean result = new Client().RegisterEvent(hangsa);
 //        new Client().GetLikeNum("100");
-          new Client().GetLike(String.valueOf(77107));
+//        new Client().GetLike(String.valueOf(77107));
+        new Client().GetAllEvent();
+//        new Client().GetMyEvent();
 //        new Client().SearchPlace("건국대학교", null, null);
     }
 
@@ -150,12 +143,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //내가 등록한 행사들 나열
             fragmentManager = getFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-
-            HeadlinesFragment firstFragment = new HeadlinesFragment();
-            firstFragment.setArguments(getIntent().getExtras());
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, firstFragment)
-                    .commit();
+            MyFrag myFrag= new MyFrag();
+            fragmentTransaction.replace(R.id.container_fragment, myFrag);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         }
         else if (id == R.id.search) {
 
@@ -183,6 +174,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //여기서는 어댑터를 바꿔줘야 한다잉
         }// 추천
         else if (id == R.id.reg) {
+            fragmentManager = getFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
             RegFrag regFrag = new RegFrag();
             fragmentTransaction.replace(R.id.container_fragment, regFrag);
             fragmentTransaction.addToBackStack(null);
@@ -221,4 +214,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
         }
     }
+
 }

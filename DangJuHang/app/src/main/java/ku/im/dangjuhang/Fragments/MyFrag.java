@@ -11,7 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,8 +31,10 @@ import ku.im.dangjuhang.R;
 public class MyFrag extends Fragment{
     TextView text;
     ListView listView;
-    ArrayList<Hangsa> arrayList;
-    HangsaAdapter adapter;
+    ArrayList<Hangsa> hangsaList;
+    ArrayList<String> templist;
+    ArrayAdapter<String> adapter;
+    HangsaAdapter hangsaAdapter;
     int clickPoint =-1;
     @Nullable
     @Override
@@ -38,37 +43,47 @@ public class MyFrag extends Fragment{
         init(root);
         return root;
     }
-    void init(final View v){
+    void init(View v){
         listView = (ListView)v.findViewById(R.id.myfrag_listview);
 
+        templist = new ArrayList<String>();
+        hangsaList = new Client().GetMyEvent();
+        if(hangsaList.size() <= 0){
+            text = (TextView)v.findViewById(R.id.myfrag_NoHangsatext);
+            text.setText("내가 등록한 행사가\n없습니다");
+        }else {
+            for (int i = 0; i < hangsaList.size(); i++) {
 
-//        arrayList.add();
-        adapter = new HangsaAdapter(getActivity(), R.id.myfrag_listview , arrayList);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("삭제");
-
-                LayoutInflater inflater = getActivity().getLayoutInflater();
-                final View layout = inflater.inflate(R.layout.alert_dialog,(ViewGroup)v.findViewById(R.id.mainActivity));
-
-                builder.setView(layout);
-                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
+                templist.add(hangsaList.get(i).getMtitle());
             }
-        });
+            adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, templist);
+            listView.setAdapter(adapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("삭제");
+
+                    LayoutInflater inflater = getActivity().getLayoutInflater();
+                    final View layout = inflater.inflate(R.layout.alert_dialog, (ViewGroup) getActivity().findViewById(R.id.mainActivity));
+
+                    builder.setView(layout);
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                }
+            });
+        }
     }
 
     void deleteMyHangsa(){
