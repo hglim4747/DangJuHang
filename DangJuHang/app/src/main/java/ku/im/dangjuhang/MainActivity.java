@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import ku.im.dangjuhang.Fragments.ArticleFragment;
 import ku.im.dangjuhang.Fragments.HeadlinesFragment;
-import ku.im.dangjuhang.Fragments.HeadlinesFragmentForRec;
 import ku.im.dangjuhang.Fragments.MyFrag;
 import ku.im.dangjuhang.Fragments.RegFrag;
 
