@@ -17,15 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import ku.im.dangjuhang.Fragments.ArticleFragment;
 import ku.im.dangjuhang.Fragments.HeadlinesFragment;
 import ku.im.dangjuhang.Fragments.RegFrag;
@@ -175,6 +166,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //여기서는 어댑터를 바꿔줘야 한다잉
         }// 추천
         else if (id == R.id.reg) {
+            fragmentManager = getFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
             RegFrag regFrag = new RegFrag();
             fragmentTransaction.replace(R.id.container_fragment, regFrag);
             fragmentTransaction.addToBackStack(null);
@@ -213,4 +206,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
         }
     }
+
 }
