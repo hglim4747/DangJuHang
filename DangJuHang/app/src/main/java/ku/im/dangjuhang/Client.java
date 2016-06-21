@@ -161,6 +161,46 @@ public class Client {
         return jsonObject;
     }
 
+    public JSONObject GetAllEvent()
+    {
+        if(userdata == null) return null;
+        JSONObject params = new JSONObject();
+
+        boolean result = false;
+        String t = request("get_all_event", params);
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(t);
+            result = jsonObject.getBoolean("result");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
+    public JSONObject GetMyEvent()
+    {
+        String userid = userdata.get("id");
+        if(userdata == null) return null;
+        JSONObject params = new JSONObject();
+        try {
+            params.put("userid", userid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        boolean result = false;
+        String t = request("get_my_event", params);
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(t);
+            result = jsonObject.getBoolean("result");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
     public String request(String func, JSONObject params)
     {
         httpClient.getParams().setParameter("http.protocol.content-charset", "UTF-8");
