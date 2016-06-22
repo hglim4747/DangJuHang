@@ -239,7 +239,7 @@ public class Client {
         return list;
     }
 
-    public ArrayList<Hangsa> GetAllLikeEvent()
+    public ArrayList<String> GetAllLikeEvent()
     {
         if(userdata == null) return null;
         String userid = userdata.get("id");
@@ -259,7 +259,15 @@ public class Client {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        ArrayList<Hangsa> list = parseToHangsaList(jsonObject);
+
+        ArrayList<String> list = new ArrayList<>();
+        try {
+            for (int i = 0; i < jsonObject.length() - 1; i++) {
+                list.add(jsonObject.getString(String.valueOf(i)));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return list;
     }
 
