@@ -3,6 +3,7 @@ package ku.im.dangjuhang;
 /**
  * Created by kim on 2016-05-26.
 */
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +20,11 @@ import java.util.ArrayList;
 public class HangsaAdapter extends ArrayAdapter<Hangsa> {
     ArrayList<Hangsa> items;
     Context context;
-
+    public static double dis;
     public HangsaAdapter(Context context, int resource, ArrayList<Hangsa> objects) {
         super(context, resource, objects);
         items = objects;
+
         this.context = context;
     }
     @Override
@@ -51,14 +53,14 @@ public class HangsaAdapter extends ArrayAdapter<Hangsa> {
         double dx;
         double dy;
         if(p.x != 0 && p.y != 0) {
-           dx = (p.x - xn) * 92;
+            dx = (p.x - xn) * 92;
             dy = (p.y - xa) * 114;
         }
         else{
             dx = 0;
             dy = 0;
         }
-        double dis = Math.sqrt(dx * dx + dy * dy);
+        dis = Math.sqrt(dx * dx + dy * dy);
         String out = String.format("%.2f",dis);
         if(p.x != 0 && p.y != 0) {
             district.setText("내 위치로부터 " + out + "km"); // 여기에 거리 정보 넣어야돼애ㅐㅐ
@@ -69,4 +71,5 @@ public class HangsaAdapter extends ArrayAdapter<Hangsa> {
 
         return v;
     }
+
 }
