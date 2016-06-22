@@ -50,6 +50,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             Toast.makeText(this, Client.userdata.get("name") + "님 환영합니다.\n연령 : " + Client.userdata.get("age")+"0대", Toast.LENGTH_LONG).show();
         }
+        else
+        {
+            finish();
+        }
 
         int extrapos = getIntent().getIntExtra("position", -1);
         if( extrapos >= 0 )
@@ -64,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        new Client().GetAllEvent();
 //        new Client().GetMyEvent();
 //        new Client().SearchPlace("ㅅ", null, null);
-
+        new Client().GetAllLikeEvent();
     }
 
     void init(Bundle savedInstanceState){

@@ -95,7 +95,7 @@ public class ArticleFragment extends Fragment {
 
             mCurrentPosition = position;
             new DownloadImageTask(articleimg).execute(SeoulXMLParser.getArray().get(position).getMmain_img());
-            articletext.setText(SeoulXMLParser.getArray().get(position).getMtitle());
+            articletext.setText("< "+SeoulXMLParser.getArray().get(position).getMtitle()+">");
             fragment_where.setText(SeoulXMLParser.getArray().get(position).getMplace());
             fragment_date.setText(SeoulXMLParser.getArray().get(position).getMstart_date() + " ~ " + SeoulXMLParser.getArray().get(position).getMend_date());
             fragment_who.setText(SeoulXMLParser.getArray().get(position).getMorg_link());

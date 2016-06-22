@@ -48,13 +48,23 @@ public class HangsaAdapter extends ArrayAdapter<Hangsa> {
         double xa = MainActivity.la;
         double xn = MainActivity.ln;
 
-        double dx = (p.x - xn) * 92;
-        double dy = (p.y - xa) * 114;
-
+        double dx;
+        double dy;
+        if(p.x != 0 && p.y != 0) {
+           dx = (p.x - xn) * 92;
+            dy = (p.y - xa) * 114;
+        }
+        else{
+            dx = 0;
+            dy = 0;
+        }
         double dis = Math.sqrt(dx * dx + dy * dy);
         String out = String.format("%.2f",dis);
-        district.setText("내 위치로부터 " + out + "km"); // 여기에 거리 정보 넣어야돼애ㅐㅐ
-
+        if(p.x != 0 && p.y != 0) {
+            district.setText("내 위치로부터 " + out + "km"); // 여기에 거리 정보 넣어야돼애ㅐㅐ
+        }else{
+            district.setText("내 위치로부터 어딘가");
+        }
         new DownloadImageTask(ii).execute(p.getMmain_img());
 
         return v;
