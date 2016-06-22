@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import ku.im.dangjuhang.Client;
 import ku.im.dangjuhang.Hangsa;
 import ku.im.dangjuhang.HangsaAdapter;
+import ku.im.dangjuhang.MainActivity;
 import ku.im.dangjuhang.SeoulXMLParser;
 
 public class HeadlinesFragment extends ListFragment {
@@ -24,6 +25,7 @@ public class HeadlinesFragment extends ListFragment {
     ArrayList<Hangsa> arrayList = new ArrayList<Hangsa>();
     String Url;
     public static SeoulXMLParser mXMLParser;
+    public static int type = 0;
 
     @Override
     public void onAttach(Activity activity) {
@@ -76,17 +78,74 @@ public class HeadlinesFragment extends ListFragment {
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             arrayList = mXMLParser.getArray();
+
             ArrayList<Hangsa> list = new Client().GetAllEvent();
             if(list == null)return;
+            list = new Client().GetAllEvent();
+
             arrayList.addAll(list);
+
+            if (type == 1)
+            {
+                ArrayList<String> as = new Client().GetAllLikeEvent();
+                for(int j=arrayList.size()-1; j>=0; j--)
+                {
+                    boolean exist = false;
+                    for(int i=0; i<as.size(); i++)
+                    {
+                        if(as.get(i).equals(arrayList.get(j).getMcultcode()))
+                        {
+                            exist = true;
+                            break;
+                        }
+                    }
+                    if(exist == false) arrayList.remove(j);
+                }
+            }
+
             for(int i=0; i<list.size(); i++)
                 list.get(i).updatePlace();
+
+            if(type == 2)
+            {
+                for(int i=0; i<arrayList.size(); i++)
+                {
+                    for(int j = i+1; j<arrayList.size(); j++)
+                    {
+                        Hangsa a = arrayList.get(i);
+                        Hangsa b = arrayList.get(j);
+                        double aa = getDistance(a);
+                        double bb = getDistance(b);
+                        if(aa > bb)
+                        {
+                            arrayList.set(i, b);
+                            arrayList.set(j, a);
+                        }
+                    }
+                }
+            }
 
             adapter = new HangsaAdapter(getActivity(),android.R.layout.simple_list_item_1,arrayList);
             setListAdapter(adapter);
         }
     };
 
+    double getDistance(Hangsa p)
+    {
+        double dx = 0, dy = 0;
+        if(p.x != 0 && p.y != 0) {
+            dx = (p.x - MainActivity.ln) * 92;
+            dy = (p.y - MainActivity.la) * 114;
+        }
+        else
+        {
+            dx = 1000;
+            dy = 1000;
+        }
+
+        double dis = Math.sqrt(dx * dx + dy * dy);
+        return dis;
+    }
     @Override
     public void onStart() {
         super.onStart();

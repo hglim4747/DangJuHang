@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        new Client().GetAllEvent();
 //        new Client().GetMyEvent();
 //        new Client().SearchPlace("ㅅ", null, null);
-        new Client().GetAllLikeEvent();
+//        new Client().GetAllLikeEvent();
     }
 
     void init(Bundle savedInstanceState){
@@ -166,6 +166,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
 
         int id = item.getItemId();
+
+        HeadlinesFragment.type = 0;
         if (id == R.id.user) {
             //내가 등록한 행사들 나열
             fragmentManager = getFragmentManager();
@@ -184,6 +186,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentManager = getFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
 
+            HeadlinesFragment.type = 1;
             HeadlinesFragment firstFragment = new HeadlinesFragment();
             firstFragment.setArguments(getIntent().getExtras());
             fragmentManager.beginTransaction()
@@ -195,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentManager = getFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
 
+            HeadlinesFragment.type = 2;
             HeadlinesFragment firstFragment = new HeadlinesFragment();
             firstFragment.setArguments(getIntent().getExtras());
             fragmentManager.beginTransaction()
